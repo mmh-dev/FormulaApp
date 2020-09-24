@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">FormulaApp</string>
+    <string name="main_menu">Главное меню</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="formula_autoparts">Формула - автозапчасти</string>
+    <string name="company_email">murod.hodjaev@gmail.com</string>
+    
+    <string-array name="main_categories">
+        <item>Двигатель</item>
+        <item>Трансмиссия</item>
+        <item>Подвеска</item>
+        <item>Рулевое управление</item>
+        <item>Система охлаждения</item>
+        <item>Система зажигания</item>
+        <item>Топливная система</item>
+        <item>Тормозная система</item>
+        <item>Электрооборудование</item>
+        <item>Датчики</item>
+        <item>Кузов</item>
+        <item>Салон</item>
+        <item>Масла</item>
+        <item>Неисправности</item>
+        <item>История</item>
+    </string-array>
+
+    <string-array name="main_categories_desc">
+        <item>Механизмы и расходники</item>
+        <item>МКПП, АКПП, РКПП и др.</item>
+        <item>Ходовая часть</item>
+        <item>Гур, рейка и др.</item>
+        <item>Термостат, радиатор и др.</item>
+        <item>Свечи, катушки и др.</item>
+        <item>Бак, фильтр и др.</item>
+        <item>Колодки, диски и др.</item>
+        <item>Системы, провода и др.</item>
+        <item>ХХ, уровень топлива и др.</item>
+        <item>Внешний вид</item>
+        <item>Интерьер автомобиля</item>
+        <item>Виды, характеристики и др.</item>
+        <item>Частые поломки</item>
+        <item>История логотипов автомобилей</item>
+    </string-array>
 </resources>
