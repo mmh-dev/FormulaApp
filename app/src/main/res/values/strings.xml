@@ -1,12 +1,30 @@
 <resources>
-    <string name="app_name">FormulaApp</string>
+    <string name="app_name">Формула - Автозапчасти</string>
     <string name="main_menu">Главное меню</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="formula_autoparts">Формула - автозапчасти</string>
+    <string name="formula_autoparts">Формула - Автозапчасти</string>
     <string name="company_email">murod.hodjaev@gmail.com</string>
-    
+    <string name="signIn">Вход в приложение</string>
+    <string name="your_email">Ваш email</string>
+    <string name="your_password">Ваш пароль</string>
+    <string name="dont_have_registration">Еще нет регистрации?</string>
+    <string name="create_new_account">Создать новый аккаунт</string>
+    <string name="sign_in">Войти</string>
+    <string name="signIn_google">Войти с Google</string>
+    <string name="or">- или -</string>
+    <string name="register">регистрация пользователя</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="choose_your_status">Выберите ваш статус</string>
+    <string name="intern">Стажер</string>
+    <string name="employee">сотрудник</string>
+    <string name="registation_agreement_text">Выполняя регистрацию, Вы соглашаетесь с условиями</string>
+    <string name="privacy_policy">Политики конфиденциальности</string>
+    <string name="formula_ltd">ОсОО \"Формула\"</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_up_google">регистрация с Google</string>
+
     <string-array name="main_categories">
         <item>Двигатель</item>
         <item>Трансмиссия</item>
