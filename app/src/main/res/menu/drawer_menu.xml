@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/favourites"
+            android:title="Your favourite movies">
+        </item>
+
+        <item android:id="@+id/rated_movies"
+            android:title="Your rated movies">
+        </item>
+
+    </group>
+
+</menu>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "323883309072",
+    "firebase_url": "https://formulaapp-aa9a0.firebaseio.com",
+    "project_id": "formulaapp-aa9a0",
+    "storage_bucket": "formulaapp-aa9a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323883309072:android:bba859bf116530c0395295",
+        "android_client_info": {
+          "package_name": "com.example.formulaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323883309072-m4cj1i6pngbs5pgs50f5ng6b3s848ipr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9qRJopoC_E3GqRa_6f3BmxGSrTZvDKSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323883309072-m4cj1i6pngbs5pgs50f5ng6b3s848ipr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
