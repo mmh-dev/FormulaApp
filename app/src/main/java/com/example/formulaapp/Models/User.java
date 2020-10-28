@@ -1,48 +1,26 @@
 package com.example.formulaapp.Models;
 
+import java.util.List;
+
 public class User {
 
     private String id;
     private String email;
     private String username;
     private String imageUrl;
-    private boolean hasChat;
     private String status;
+    private List<Points> pointsList;
 
-    public User(String id, String email, String username, String imageUrl, boolean hasChat, String status) {
+    public User(String id, String email, String username, String imageUrl, String status, List<Points> pointsList) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.imageUrl = imageUrl;
-        this.hasChat = hasChat;
         this.status = status;
+        this.pointsList = pointsList;
     }
 
     public User() {
-    }
-
-    public boolean isHasChat() {
-        return hasChat;
-    }
-
-    public void setHasChat(boolean hasChat) {
-        this.hasChat = hasChat;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getId() {
@@ -67,5 +45,29 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<Points> getPointsList() {
+        return pointsList;
+    }
+
+    public void setPointsList(List<Points> pointsList) {
+        this.pointsList = pointsList;
     }
 }
