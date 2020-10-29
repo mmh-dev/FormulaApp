@@ -35,19 +35,20 @@ public class Login extends AppCompatActivity {
     FirebaseUser firebaseUser;
     GoogleSignInClient mGoogleSignInClient;
 
+
     @Override
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null){
             startActivity(new Intent(Login.this, MainActivity.class));
-            finish();
+
         }
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null){
             startActivity(new Intent(Login.this, MainActivity.class));
-            finish();
+
         }
     }
 

@@ -5,7 +5,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="formula_autoparts">Формула - Автозапчасти</string>
-    <string name="company_email">murod.hodjaev@gmail.com</string>
     <string name="signIn">Вход в приложение</string>
     <string name="your_email">Ваш email</string>
     <string name="your_password">Ваш пароль</string>
@@ -40,6 +39,14 @@
            - а также в целях, разрешенных самим пользователем приложения.\n\n
         Кроме того, мы используем информацию личного характера для поддержания связи с пользователем приложения. Например, если Вы направляете нам сообщение через службу поддержки приложения, мы можем воспользоваться Вашей персональной информацией, чтобы ответить на него. Мы также используем персональную информацию для того, чтобы проинформировать Вас о внесении существенных изменений в настоящую Политику конфиденциальности.\n\n
         Время от времени мы можем приглашать пользователей предоставлять информацию в формате опросов или анкет. Участие в таких опросах или подписных листах совершенно добровольно, следовательно, пользователь может принять решение, раскрывать запрашиваемую информацию или нет. В дополнение к прочим целям, предусмотренным в настоящей Политике конфиденциальности, контактная информация, полученная в связи с опросами или анкетами, используется для сообщения Вам результатов опросов или анкетирования. "</string>
+    <string name="spravochnik">СПРАВОЧНИК АВТОЗАПЧАСТЕЙ</string>
+    <string name="main_page">На главную</string>
+    <string name="rating">Мой рейтинг</string>
+    <string name="saved_pages">Сохраненные статьи</string>
+    <string name="take_final_test">Пройти финальный тест</string>
+    <string name="send_email_to_manager">Написать менеджеру</string>
+    <string name="about_app">О приложении</string>
+    <string name="logout">Выход</string>
 
     <string-array name="main_categories">
         <item>Двигатель</item>
@@ -74,4 +81,7 @@
         <item>Виды, характеристики и др.</item>
         <item>Частые поломки</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
