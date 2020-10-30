@@ -18,11 +18,6 @@
         app:menu="@menu/drawer_menu"
         style="@style/ThemeOverlay.AppCompat.Light"
         android:layout_gravity="start"/>
-    
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,6 +41,5 @@
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

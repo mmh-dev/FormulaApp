@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MainMenuFragment()).commit();
-            navigationView.setCheckedItem(R.id.spravochnik);
         }
 
         View headNavView = navigationView.getHeaderView(0);
@@ -148,7 +147,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 }
