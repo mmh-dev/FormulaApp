@@ -1,6 +1,5 @@
 package com.example.formulaapp.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.formulaapp.Adapters.MainMenuAdapter;
 import com.example.formulaapp.Models.MenuBullet;
@@ -30,6 +28,8 @@ public class MainMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
+
+        getActivity().setTitle("");
         fillMenuList();
 
         adapter = new MainMenuAdapter(menuBulletList, getContext());
@@ -40,17 +40,19 @@ public class MainMenuFragment extends Fragment {
         adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
             @Override
             public void onItemClick(int position) {
+                SecondMenuFragment secondMenuFragment = new SecondMenuFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("header", menuBulletList.get(position).getHeader());
+                secondMenuFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new SecondMenuFragment())
-                        .commit();
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, secondMenuFragment).
+                        addToBackStack("MainMenu").commit();
             }
         });
 
-
-
         return view;
     }
-
     private void fillMenuList() {
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         String[] descCats = getResources().getStringArray(R.array.main_categories_desc);
@@ -68,6 +70,5 @@ public class MainMenuFragment extends Fragment {
         menuBulletList.add(new MenuBullet(manCats[10], descCats[10], R.drawable.car_body));
         menuBulletList.add(new MenuBullet(manCats[11], descCats[11], R.drawable.salon));
         menuBulletList.add(new MenuBullet(manCats[12], descCats[12], R.drawable.oil));
-        menuBulletList.add(new MenuBullet(manCats[13], descCats[13], R.drawable.repairing));
     }
 }

@@ -4,21 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.formulaapp.Models.MenuBullet;
 import com.example.formulaapp.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder> {
@@ -63,7 +57,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
         public Holder(@NonNull View itemView, RecycleOnClickListener listener) {
             super(itemView);
 
-            header = itemView.findViewById(R.id.main_header);
+            header = itemView.findViewById(R.id.header);
             desc = itemView.findViewById(R.id.main_desc);
             catImage = itemView.findViewById(R.id.catImage);
 

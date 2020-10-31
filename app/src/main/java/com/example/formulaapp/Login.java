@@ -44,12 +44,6 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this, MainActivity.class));
 
         }
-
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null){
-            startActivity(new Intent(Login.this, MainActivity.class));
-
-        }
     }
 
     @Override

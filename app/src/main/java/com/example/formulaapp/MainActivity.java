@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             super.onBackPressed();
-            System.exit(0);
+//            moveTaskToBack(true);
         }
 
     }
@@ -63,53 +66,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.spravochnik:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SpravochnikFragment()).commit();
-                        break;
-                    case R.id.main:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainMenuFragment()).commit();
-                        break;
-                    case R.id.rating:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RatingFragment()).commit();
-                        break;
-                    case R.id.saved_pages:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SavedPagesFragment()).commit();
-                        break;
-                    case R.id.final_test:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TestFragment()).commit();
-                        break;
-                    case R.id.send_email_to_manager:
-                        Intent intent = new Intent(Intent.ACTION_SENDTO);
-                        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-                        intent.putExtra(Intent.EXTRA_EMAIL, "formula.osh.manager@gmail.com");
-                        if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(intent);
-                        }
-                        break;
-                    case R.id.about_app:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutAppFragment()).commit();
-                        break;
-                    case R.id.logout:
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(MainActivity.this, Login.class));
-                        finish();
-                        break;
-                }
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
+        Menu nav_menu = navigationView.getMenu();
+        if (firebaseUser.getEmail().equals("formula.osh.manager@gmail.com")){
+            nav_menu.findItem(R.id.rating).setVisible(false);
+            nav_menu.findItem(R.id.final_test).setVisible(false);
+            nav_menu.findItem(R.id.send_email_to_manager).setVisible(false);
+        }
+        else {
+            nav_menu.findItem(R.id.users_rating).setVisible(false);
+            nav_menu.findItem(R.id.edit_test).setVisible(false);
+            nav_menu.findItem(R.id.manage_users).setVisible(false);
+            nav_menu.findItem(R.id.send_email_to_developer).setVisible(false);
+        }
+
+
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -125,10 +102,9 @@ public class MainActivity extends AppCompatActivity {
         username = (TextView) headNavView.findViewById(R.id.nav_username);
         user_email = (TextView) headNavView.findViewById(R.id.nav_user_email);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 User user = snapshot.getValue(User.class);
                 if (user != null) {
                     username.setText(user.getUsername());
@@ -145,6 +121,51 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.spravochnik:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new SpravochnikFragment()).commit();
+                        break;
+                    case R.id.main:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new MainMenuFragment()).commit();
+                        break;
+                    case R.id.rating:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new RatingFragment()).commit();
+                        break;
+                    case R.id.saved_pages:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new SavedPagesFragment()).commit();
+                        break;
+                    case R.id.final_test:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new TestFragment()).commit();
+                        break;
+                    case R.id.send_email_to_manager:
+                        Intent intent = new Intent(Intent.ACTION_SENDTO);
+                        intent.setData(Uri.parse("mailto:"));
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"formula.osh.manager@gmail.com"});
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
+                        break;
+                    case R.id.about_app:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutAppFragment()).commit();
+                        break;
+                    case R.id.logout:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(MainActivity.this, Login.class));
+                        finish();
+                        break;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
         });
     }

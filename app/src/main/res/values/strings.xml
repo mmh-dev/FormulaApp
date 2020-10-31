@@ -42,9 +42,13 @@
     <string name="spravochnik">СПРАВОЧНИК АВТОЗАПЧАСТЕЙ</string>
     <string name="main_page">На главную</string>
     <string name="rating">Мой рейтинг</string>
+    <string name="users_rating">Рейтинг пользователей</string>
     <string name="saved_pages">Сохраненные статьи</string>
     <string name="take_final_test">Пройти финальный тест</string>
+    <string name="edit_test">Редактировать тесты</string>
+    <string name="manage_users">Управление пользователями</string>
     <string name="send_email_to_manager">Написать менеджеру</string>
+    <string name="send_email_to_developer">Написать разработчику</string>
     <string name="about_app">О приложении</string>
     <string name="logout">Выход</string>
 
@@ -62,7 +66,6 @@
         <item>Кузов</item>
         <item>Салон</item>
         <item>Масла</item>
-        <item>Неисправности</item>
     </string-array>
 
     <string-array name="main_categories_desc">
@@ -75,13 +78,199 @@
         <item>Бак, фильтр и др.</item>
         <item>Колодки, диски и др.</item>
         <item>Системы, провода и др.</item>
-        <item>ХХ, уровень топлива и др.</item>
+        <item>Уровень топлива и др.</item>
         <item>Внешний вид</item>
         <item>Интерьер автомобиля</item>
         <item>Виды, характеристики и др.</item>
-        <item>Частые поломки</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="engine">
+        <item>Воздушный фильтр</item>
+        <item>Глушитель</item>
+        <item>Лямбда-зонд</item>
+        <item>Коллектор</item>
+        <item>Турбина</item>
+        <item>ГРМ</item>
+        <item>Ремень ГРМ</item>
+        <item>Клапаны</item>
+        <item>Блок цилиндров</item>
+        <item>Головка блока цилиндров</item>
+        <item>Поршни</item>
+        <item>Цилиндры</item>
+        <item>Коленчатый вал</item>
+        <item>Распределительный вал</item>
+        <item>Масляный фильтр</item>
+    </string-array>
+
+    <string-array name="gearbox">
+        <item>Устройство МКПП</item>
+        <item>Двухвальные и трехвальные МКПП</item>
+        <item>Синхронизированные и несинхронизированные МКПП</item>
+        <item>Количество ступеней МКПП</item>
+        <item>Принцип функционирования МКПП</item>
+        <item>Схемы переключения МКПП</item>
+        <item>Что такое АКПП?</item>
+        <item>Гидротрансформатор АКПП</item>
+        <item>Коропка передач АКПП</item>
+        <item>Режим работы АКПП</item>
+        <item>Система управления АКПП</item>
+        <item>Система смазки и охлаждения АКПП</item>
+        <item>Особенность АКПП у Honda</item>
+        <item>Устройство РКПП</item>
+        <item>КП с двумя сцеплениями</item>
+        <item>Принцип работы РКПП</item>
+    </string-array>
+
+    <string-array name="transmission">
+        <item>Летняя резина</item>
+        <item>Диски</item>
+        <item>Шипованная резина</item>
+        <item>Амортизатор</item>
+        <item>Стабилизатор поперечной устойчивости</item>
+        <item>Ступица</item>
+        <item>Втулка стабилизатора</item>
+        <item>Пружины</item>
+        <item>Стойки</item>
+        <item>ШРУС - шарнир угловых скоростей</item>
+        <item>Устройство колеса</item>
+    </string-array>
+
+    <string-array name="steering_wheel">
+        <item>Устройство электроусилителя руля</item>
+        <item>Устройство гидроусилителя руля</item>
+        <item>Рулевое управление автомобилем</item>
+        <item>Устройство и принцип работы рулевой рейки</item>
+        <item>Устройство рулевой колонки автомобиля</item>
+        <item>Система активного рулевого управления - AFS</item>
+    </string-array>
+
+    <string-array name="cooling">
+        <item>Принцип работы системы охлаждения</item>
+        <item>Радиатор</item>
+        <item>Вентилятор радиатора</item>
+        <item>Центробежный насос</item>
+        <item>Термостат</item>
+        <item>Расширительный бачок</item>
+    </string-array>
+
+    <string-array name="igniting">
+        <item>Свечи зажигания</item>
+        <item>Катушка зажигания</item>
+        <item>Устройство датчика Холла</item>
+    </string-array>
+
+    <string-array name="fuel">
+        <item>Принцип работы топливных систем</item>
+        <item>Топливный насос</item>
+        <item>Топливный фильтр</item>
+        <item>Топливный бак</item>
+        <item>Датчик уровня топлива</item>
+        <item>Система впрыска дизельных двигателей</item>
+        <item>Система впрыска бензиновых двигателей</item>
+        <item>Адсорбер</item>
+        <item>Форсунки</item>
+        <item>Дроссельная заслонка</item>
+    </string-array>
+
+    <string-array name="brakes">
+        <item>Устройство тормозной системы</item>
+        <item>Принцип работы тормозной системы</item>
+        <item>Принцип работы дисковых тормозов</item>
+        <item>Органические тормозные колодки</item>
+        <item>Керамические тормозные колодки</item>
+        <item>Полуметаллические тормозные колодки</item>
+        <item>Невентилируемые тормозные диски</item>
+        <item>Вентилируемые тормозные диски</item>
+        <item>Просверленные тормозные диски</item>
+        <item>Диск с прорезями</item>
+        <item>Диск с канавками</item>
+        <item>Волнообразный диск</item>
+        <item>Антиблокировочная система - ABS</item>
+        <item>Противобуксовочная система - TCS</item>
+        <item>Электронный контроль устойчивости - ESP</item>
+        <item>Система курсовой устойчивости - ESC</item>
+        <item>Система распределения тормозных усилий - EBD</item>
+        <item>Электронная блокировка дифференциала - EDS</item>
+        <item>Антипробуксовочная система - ASR</item>
+        <item>Ручной тормоз</item>
+    </string-array>
+
+    <string-array name="electric">
+        <item>Аккумулятор</item>
+        <item>Стартер</item>
+        <item>Генератор</item>
+        <item>Предохранители</item>
+        <item>Лампы освещения</item>
+        <item>Бортовой компьютер</item>
+        <item>Магнитола</item>
+        <item>Приборная панель</item>
+        <item>Панель управления обгревом салона - печка</item>
+        <item>Подушка безопасности</item>
+    </string-array>
+
+    <string-array name="sensors">
+        <item>Датчик вентилятора</item>
+        <item>Датчик скорости</item>
+        <item>Датчик вентилятора охлаждения радиатора</item>
+        <item>Датчик давления в шинах</item>
+        <item>Датчик холостого хода</item>
+        <item>Датчик уровня топлива</item>
+        <item>Датчик положения дроссельной заслонки</item>
+        <item>Датчик положения коленчатого вала</item>
+        <item>Датчик температуры охлаждающей жидкости</item>
+        <item>Датчик расхода воздуха</item>
+        <item>Кислородный датчик - лямбда-зонд</item>
+        <item>Датчик давления масла</item>
+        <item>Датчик детонации</item>
+        <item>Датчик угла поворота распредвала</item>
+        <item>Датчик ABS</item>
+    </string-array>
+
+    <string-array name="car_body">
+        <item>Тип кузова</item>
+        <item>Капот</item>
+        <item>Багажник</item>
+        <item>Двери</item>
+        <item>Система очистки стекол</item>
+        <item>Бампер передний</item>
+        <item>Бампер задний</item>
+        <item>Пороги</item>
+        <item>Молдинги</item>
+        <item>Ветровики</item>
+        <item>Крылья</item>
+        <item>Зеркала</item>
+        <item>Крышка бензобака</item>
+        <item>Спойлер</item>
+
+    </string-array>
+
+    <string-array name="salon">
+        <item>Водительской сиденье</item>
+        <item>Пассажирское сиденье</item>
+        <item>Руль</item>
+        <item>Коврики</item>
+        <item>Чехлы</item>
+        <item>Ремни безопасности</item>
+        <item>Солнцезащитные козырьки</item>
+        <item>Подстаканники</item>
+        <item>Ручник - стояночный тормоз</item>
+        <item>Ручка управления КПП</item>
+    </string-array>
+
+    <string-array name="oil">
+        <item>Минеральное масло  - органическое</item>
+        <item>Полусинтетическое масло</item>
+        <item>Синтетическое масло</item>
+        <item>Моторное масло</item>
+        <item>Трансмиссионное масло</item>
+        <item>Масло для гидроусилителя</item>
+        <item>Зимнее масло</item>
+        <item>Летнее масло</item>
+        <item>Всесезонное масло</item>
+    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start_test">Начать тест по разделу</string>
+    <string name="add_question">Добавить вопрос</string>
+    <string name="save_article">Сохранить статью</string>
 
 </resources>

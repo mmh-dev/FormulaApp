@@ -22,13 +22,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/main_header"
+            android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Header"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/catImage"
             app:layout_constraintTop_toTopOf="@+id/catImage" />
 
@@ -37,8 +38,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/catImage"
-            app:layout_constraintStart_toStartOf="@+id/main_header" />
+            app:layout_constraintStart_toStartOf="@+id/header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

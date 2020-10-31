@@ -3,16 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-
+    <group>
         <item
             android:id="@+id/spravochnik"
             android:title="@string/spravochnik" />
     </group>
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/group1">
-
+    <group android:id="@+id/group1">
         <item
             android:id="@+id/main"
             android:title="@string/main_page"
@@ -22,6 +19,10 @@
             android:title="@string/rating"
             android:icon="@drawable/ic_bar_chart_black_48dp"/>
         <item
+            android:id="@+id/users_rating"
+            android:title="@string/users_rating"
+            android:icon="@drawable/ic_bar_chart_black_48dp"/>
+        <item
             android:id="@+id/saved_pages"
             android:icon="@drawable/ic_star_border_black_36dp"
             android:title="@string/saved_pages"/>
@@ -29,14 +30,24 @@
             android:id="@+id/final_test"
             android:icon="@drawable/ic_bullet_list"
             android:title="@string/take_final_test"/>
+        <item
+            android:id="@+id/edit_test"
+            android:icon="@drawable/ic_bullet_list"
+            android:title="@string/edit_test"/>
+        <item
+            android:id="@+id/manage_users"
+            android:icon="@drawable/ic_supervised_user_circle_24px"
+            android:title="@string/manage_users" />
     </group>
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/group2">
-
+    <group  android:id="@+id/group2">
         <item
             android:id="@+id/send_email_to_manager"
             android:title="@string/send_email_to_manager"
+            android:icon="@drawable/ic_email_24px"/>
+        <item
+            android:id="@+id/send_email_to_developer"
+            android:title="@string/send_email_to_developer"
             android:icon="@drawable/ic_email_24px"/>
         <item
             android:id="@+id/about_app"
@@ -46,7 +57,6 @@
             android:id="@+id/logout"
             android:icon="@drawable/ic_exit_to_app_black_36dp"
             android:title="@string/logout"/>
-
     </group>
 
 </menu>
