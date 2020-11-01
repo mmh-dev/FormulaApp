@@ -16,13 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.formulaapp.Fragments.AboutAppFragment;
+import com.example.formulaapp.Fragments.EditTestFragment;
 import com.example.formulaapp.Fragments.MainMenuFragment;
+import com.example.formulaapp.Fragments.ManageUserFragment;
 import com.example.formulaapp.Fragments.RatingFragment;
 import com.example.formulaapp.Fragments.SavedPagesFragment;
 import com.example.formulaapp.Fragments.SpravochnikFragment;
 import com.example.formulaapp.Fragments.TestFragment;
+import com.example.formulaapp.Fragments.UserRatingFragment;
 import com.example.formulaapp.Models.User;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +67,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.home){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new MainMenuFragment()).commit();
+        }
+        if (item.getItemId() == R.id.search){
+            Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -73,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         Menu nav_menu = navigationView.getMenu();
         if (firebaseUser.getEmail().equals("formula.osh.manager@gmail.com")){
             nav_menu.findItem(R.id.rating).setVisible(false);
-            nav_menu.findItem(R.id.final_test).setVisible(false);
             nav_menu.findItem(R.id.send_email_to_manager).setVisible(false);
         }
         else {
@@ -86,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+
 
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
@@ -139,6 +162,10 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().
                                 replace(R.id.fragment_container, new RatingFragment()).commit();
                         break;
+                    case R.id.users_rating:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new UserRatingFragment()).commit();
+                        break;
                     case R.id.saved_pages:
                         getSupportFragmentManager().beginTransaction().
                                 replace(R.id.fragment_container, new SavedPagesFragment()).commit();
@@ -147,12 +174,27 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().
                                 replace(R.id.fragment_container, new TestFragment()).commit();
                         break;
+                    case R.id.edit_test:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new EditTestFragment()).commit();
+                        break;
+                    case R.id.manage_users:
+                        getSupportFragmentManager().beginTransaction().
+                                replace(R.id.fragment_container, new ManageUserFragment()).commit();
+                        break;
                     case R.id.send_email_to_manager:
                         Intent intent = new Intent(Intent.ACTION_SENDTO);
                         intent.setData(Uri.parse("mailto:"));
                         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"formula.osh.manager@gmail.com"});
                         if (intent.resolveActivity(getPackageManager()) != null) {
                             startActivity(intent);
+                        }
+                    case R.id.send_email_to_developer:
+                        Intent intent1 = new Intent(Intent.ACTION_SENDTO);
+                        intent1.setData(Uri.parse("mailto:"));
+                        intent1.putExtra(Intent.EXTRA_EMAIL, new String[]{"murod.hodjaev@gmail.com"});
+                        if (intent1.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent1);
                         }
                         break;
                     case R.id.about_app:

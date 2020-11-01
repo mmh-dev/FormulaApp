@@ -2,19 +2,15 @@ package com.example.formulaapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.formulaapp.Models.Points;
 import com.example.formulaapp.Models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,8 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
@@ -45,7 +40,6 @@ public class Register extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     User user = new User();
-    List<Points> pointsList = new ArrayList<>();
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -63,7 +57,6 @@ public class Register extends AppCompatActivity {
         privacy_policy_link = findViewById(R.id.privacy_policy_link);
         auth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        user.setPointsList(pointsList);
         user.setStatus("");
 
         status_intern_btn.setOnClickListener(new View.OnClickListener() {
@@ -138,15 +131,24 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()){
                             firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
-
-                            reference = FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(userId);
-
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                             user.setId(userId);
                             user.setUsername(username);
                             user.setEmail(email);
                             user.setImageUrl("default");
-
+                            user.setDvigatel(0);
+                            user.setTransmissiya(0);
+                            user.setPodveska(0);
+                            user.setRul(0);
+                            user.setOhlazhdeniye(0);
+                            user.setZajiganiye(0);
+                            user.setToplivo(0);
+                            user.setTormoz(0);
+                            user.setElectro(0);
+                            user.setDatchiki(0);
+                            user.setKuzov(0);
+                            user.setSalon(0);
+                            user.setMasla(0);
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -206,6 +208,19 @@ public class Register extends AppCompatActivity {
                             user.setUsername(firebaseUser.getDisplayName());
                             user.setEmail(firebaseUser.getEmail());
                             user.setImageUrl(firebaseUser.getPhotoUrl().toString());
+                            user.setDvigatel(0);
+                            user.setTransmissiya(0);
+                            user.setPodveska(0);
+                            user.setRul(0);
+                            user.setOhlazhdeniye(0);
+                            user.setZajiganiye(0);
+                            user.setToplivo(0);
+                            user.setTormoz(0);
+                            user.setElectro(0);
+                            user.setDatchiki(0);
+                            user.setKuzov(0);
+                            user.setSalon(0);
+                            user.setMasla(0);
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

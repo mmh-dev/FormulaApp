@@ -34,6 +34,7 @@ public class SecondMenuFragment extends Fragment {
         recyclerView = view.findViewById(R.id.second_menu);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         start_test_btn = view.findViewById(R.id.start_test_btn);
+        
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -67,7 +68,7 @@ public class SecondMenuFragment extends Fragment {
                 bundle.putString("title", pagesList.get(position));
                 articleFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
                         .replace(R.id.fragment_container, articleFragment).
                         addToBackStack("SecondMenu").commit();
             }

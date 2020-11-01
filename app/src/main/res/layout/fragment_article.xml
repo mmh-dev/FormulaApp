@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_marginTop="5dp"
     tools:context=".Fragments.ArticleFragment">
 
-
-    <Button
-        android:id="@+id/save_article_empty"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginStart="200dp"
-        android:drawableLeft="@drawable/ic_star_border_yellow"
-        android:paddingLeft="10dp"
-        android:background="@drawable/btn_save_article"
-        android:layout_marginEnd="10dp"
-        android:visibility="visible"
-        android:textColor="@android:color/white"
-        android:text="@string/save_article" />
-
-    <Button
-        android:id="@+id/save_article_filled"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginStart="200dp"
-        android:drawableLeft="@drawable/ic_star_filled"
-        android:paddingLeft="10dp"
-        android:background="@drawable/btn_save_article"
-        android:layout_marginEnd="10dp"
-        android:visibility="gone"
-        android:textColor="@android:color/white"
-        android:text="@string/save_article" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -45,6 +24,9 @@
             android:id="@+id/article_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Article" />
+            android:text="jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie hgthiith it giethithiejiejgiwrjgieh ieh erore jhihiiergrej irehirehierireirhiehierhiehierhierhie'wgo ote" />
+
     </ScrollView>
-</LinearLayout>
+
+
+</RelativeLayout>

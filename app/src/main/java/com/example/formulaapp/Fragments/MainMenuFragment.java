@@ -29,7 +29,7 @@ public class MainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
-        getActivity().setTitle("");
+        getActivity().setTitle("Главное меню");
         fillMenuList();
 
         adapter = new MainMenuAdapter(menuBulletList, getContext());
@@ -45,7 +45,7 @@ public class MainMenuFragment extends Fragment {
                 bundle.putString("header", menuBulletList.get(position).getHeader());
                 secondMenuFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
                         .replace(R.id.fragment_container, secondMenuFragment).
                         addToBackStack("MainMenu").commit();
             }
