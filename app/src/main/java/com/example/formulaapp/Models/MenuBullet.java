@@ -4,6 +4,10 @@ public class MenuBullet {
     private String header;
     private String desc;
     private int catImage;
+    private int n;
+
+    public MenuBullet() {
+    }
 
     public MenuBullet(String header, String desc, int catImage) {
         this.header = header;
@@ -21,5 +25,13 @@ public class MenuBullet {
 
     public int getCatImage() {
         return catImage;
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
     }
 }

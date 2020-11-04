@@ -272,5 +272,14 @@
     <string name="start_test">Начать тест по разделу</string>
     <string name="add_question">Добавить вопрос</string>
     <string name="save_article">Сохранить статью</string>
+    <string name="questions">вопросов</string>
+    <string name="points">баллов</string>
+    <string name="next_question">следующий вопрос</string>
+    <string name="question_text">Текст вопроса</string>
+    <string name="answer_variant">Варианты ответа</string>
+    <string name="save_question">Сохранить вопрос</string>
+    <string name="cancel">отмена</string>
+    <string name="question_is_saved">Вопрос сохранен!</string>
+    <string name="fill_all_fields">Заполните все поля!</string>
 
 </resources>

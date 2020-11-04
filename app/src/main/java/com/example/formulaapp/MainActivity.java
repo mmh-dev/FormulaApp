@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.formulaapp.Fragments.AboutAppFragment;
+import com.example.formulaapp.Fragments.EditTestCategoriesFragment;
 import com.example.formulaapp.Fragments.EditTestFragment;
 import com.example.formulaapp.Fragments.MainMenuFragment;
 import com.example.formulaapp.Fragments.ManageUserFragment;
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.edit_test:
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, new EditTestFragment()).commit();
+                                replace(R.id.fragment_container, new EditTestCategoriesFragment()).commit();
                         break;
                     case R.id.manage_users:
                         getSupportFragmentManager().beginTransaction().

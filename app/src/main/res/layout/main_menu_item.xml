@@ -27,9 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Header"
+            android:textColor="@android:color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/catImage"
             app:layout_constraintTop_toTopOf="@+id/catImage" />
 
@@ -38,10 +38,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/catImage"
             app:layout_constraintStart_toStartOf="@+id/header" />
+
+        <TextView
+            android:id="@+id/questions_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:elevation="1dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/circle_red"
+            app:layout_constraintEnd_toEndOf="@+id/circle_red"
+            app:layout_constraintStart_toStartOf="@+id/circle_red"
+            app:layout_constraintTop_toTopOf="@+id/circle_red" />
+
+        <ImageView
+            android:id="@+id/circle_red"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/circle_red" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

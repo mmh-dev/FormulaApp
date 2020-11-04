@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,6 +15,17 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_star_filled_white" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +36,8 @@
             android:id="@+id/article_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie hgthiith it giethithiejiejgiwrjgieh ieh erore jhihiiergrej irehirehierireirhiehierhiehierhierhie'wgo ote" />
+            android:textSize="20sp"
+            android:text="jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie jg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi giejg rhguurghugreh gurhurhgrhrh gurughrirjg h gr jrj giejg oejgi gie hgthiith it giethithiejiejgiwrjgieh ieh erore jhihiiergrej irehirehierireirhiehierhiehierhierhie'wgo ote" />
 
     </ScrollView>
 

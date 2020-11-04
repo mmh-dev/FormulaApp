@@ -7,11 +7,7 @@
         android:icon="@drawable/ic_search_black"
         android:title="search"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/save_article"
-        android:icon="@drawable/ic_star_filled"
-        android:title="save"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home_white"

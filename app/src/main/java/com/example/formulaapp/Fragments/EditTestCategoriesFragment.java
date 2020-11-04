@@ -17,8 +17,7 @@ import com.example.formulaapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class MainMenuFragment extends Fragment {
+public class EditTestCategoriesFragment extends Fragment {
 
     List<MenuBullet> menuBulletList = new ArrayList<>();
     RecyclerView recyclerView;
@@ -29,10 +28,10 @@ public class MainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
-        getActivity().setTitle(getString(R.string.main_menu));
+        getActivity().setTitle(getString(R.string.edit_test));
         fillMenuList();
 
-        adapter = new MainMenuAdapter(menuBulletList, getContext(), 0);
+        adapter = new MainMenuAdapter(menuBulletList, getContext(), 1);
         recyclerView = view.findViewById(R.id.main_menu);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -40,19 +39,19 @@ public class MainMenuFragment extends Fragment {
         adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
             @Override
             public void onItemClick(int position) {
-                SecondMenuFragment secondMenuFragment = new SecondMenuFragment();
+                EditTestFragment editTestFragment = new EditTestFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("header", menuBulletList.get(position).getHeader());
-                secondMenuFragment.setArguments(bundle);
+                editTestFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, secondMenuFragment).
-                        addToBackStack("MainMenu").commit();
+                        .replace(R.id.fragment_container, editTestFragment).
+                        addToBackStack("EditTestMainMenu").commit();
             }
         });
-
         return view;
     }
+
     private void fillMenuList() {
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         String[] descCats = getResources().getStringArray(R.array.main_categories_desc);

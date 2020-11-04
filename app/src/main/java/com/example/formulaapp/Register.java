@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                 String txt_password = user_password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(Register.this, "Заполните все поля!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
                 }
                 else if (txt_password.length() < 6){
                     Toast.makeText(Register.this, "Пароль должен содержать не менее 6 символов!", Toast.LENGTH_LONG).show();
