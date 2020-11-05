@@ -13,11 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.formulaapp.Models.MenuBullet;
 import com.example.formulaapp.Models.Question;
 import com.example.formulaapp.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.List;
 
@@ -26,9 +22,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
     List<MenuBullet> menuBulletList;
     Context context;
     RecycleOnClickListener listener;
-    private int fragment;
-    DatabaseReference reference;
-    private int i = 0;
+    private final int fragment;
 
     public void setOnItemClickListener (RecycleOnClickListener listener){
         this.listener = listener;
@@ -52,24 +46,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
         holder.header.setText(menuBulletList.get(position).getHeader());
         holder.desc.setText(menuBulletList.get(position).getDesc());
         holder.catImage.setImageResource(menuBulletList.get(position).getCatImage());
-        reference = FirebaseDatabase.getInstance().getReference("Questions");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Question question = dataSnapshot.getValue(Question.class);
-                    assert question != null;
-                    if (question.getCategory().equals(menuBulletList.get(position).getHeader())) {
-                        i++;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        holder.questions_quantity.setText(String.valueOf(i));
+        holder.questions_quantity.setText(String.valueOf(menuBulletList.get(position).getQuestions()));
 
     }
 
