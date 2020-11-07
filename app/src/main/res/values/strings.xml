@@ -271,15 +271,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start_test">Начать тест по разделу</string>
     <string name="add_question">Добавить вопрос</string>
-    <string name="save_article">Сохранить статью</string>
     <string name="questions">вопросов</string>
     <string name="points">баллов</string>
     <string name="next_question">следующий вопрос</string>
     <string name="question_text">Текст вопроса</string>
     <string name="answer_variant">Варианты ответа</string>
-    <string name="save_question">Сохранить вопрос</string>
-    <string name="cancel">отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
     <string name="question_is_saved">Вопрос сохранен!</string>
     <string name="fill_all_fields">Заполните все поля!</string>
+    <string name="question_deleted">Вопрос успешно удален!</string>
+    <string name="correct_answer"> - Правильный ответ</string>
+    <string name="choose_correct_answer">Отметьте правильный ответ!</string>
+    <string name="delete_alert_dialog_message">Вы действительно хотите удалить этот вопрос? Это действие нельзя отменить</string>
+    <string name="yes">Да</string>
+    <string name="No">Нет</string>
+    <string name="delete">Удалить</string>
+    <string name="delete_question_dialog_title">Удаление тестового вопроса</string>
 
 </resources>

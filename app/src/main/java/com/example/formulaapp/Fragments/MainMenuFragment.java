@@ -57,18 +57,18 @@ public class MainMenuFragment extends Fragment {
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         String[] descCats = getResources().getStringArray(R.array.main_categories_desc);
 
-        menuBulletList.add(new MenuBullet(manCats[0], descCats[0], R.drawable.engine, 0));
-        menuBulletList.add(new MenuBullet(manCats[1], descCats[1], R.drawable.gearbox, 0));
-        menuBulletList.add(new MenuBullet(manCats[2], descCats[2], R.drawable.transmission, 0));
-        menuBulletList.add(new MenuBullet(manCats[3], descCats[3], R.drawable.steering_wheel, 0));
-        menuBulletList.add(new MenuBullet(manCats[4], descCats[4], R.drawable.cooling, 0));
-        menuBulletList.add(new MenuBullet(manCats[5], descCats[5], R.drawable.igniting, 0));
-        menuBulletList.add(new MenuBullet(manCats[6], descCats[6], R.drawable.fuel, 0));
-        menuBulletList.add(new MenuBullet(manCats[7], descCats[7], R.drawable.brakes, 0));
-        menuBulletList.add(new MenuBullet(manCats[8], descCats[8], R.drawable.electric, 0));
-        menuBulletList.add(new MenuBullet(manCats[9], descCats[9], R.drawable.sensors, 0));
-        menuBulletList.add(new MenuBullet(manCats[10], descCats[10], R.drawable.car_body, 0));
-        menuBulletList.add(new MenuBullet(manCats[11], descCats[11], R.drawable.salon, 0));
-        menuBulletList.add(new MenuBullet(manCats[12], descCats[12], R.drawable.oil, 0));
+        menuBulletList.add(new MenuBullet(manCats[0], descCats[0], R.drawable.engine, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[1], descCats[1], R.drawable.gearbox, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[2], descCats[2], R.drawable.transmission, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[3], descCats[3], R.drawable.steering_wheel, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[4], descCats[4], R.drawable.cooling, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[5], descCats[5], R.drawable.igniting, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[6], descCats[6], R.drawable.fuel, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[7], descCats[7], R.drawable.brakes, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[8], descCats[8], R.drawable.electric, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[9], descCats[9], R.drawable.sensors, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[10], descCats[10], R.drawable.car_body, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[11], descCats[11], R.drawable.salon, null, 0));
+        menuBulletList.add(new MenuBullet(manCats[12], descCats[12], R.drawable.oil, null, 0));
     }
 }

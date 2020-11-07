@@ -13,11 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.formulaapp.Models.MenuBullet;
 import com.example.formulaapp.Models.Question;
 import com.example.formulaapp.R;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder> {
+
+    /**
+     * fragment == 0 -> Main menu
+     * fragment == 1 -> Edit questions categories menu (manager)
+     * fragment == 2 -> Manage users menu (manager)
+     */
 
     List<MenuBullet> menuBulletList;
     Context context;
@@ -43,9 +52,16 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.header.setText(menuBulletList.get(position).getHeader());
-        holder.desc.setText(menuBulletList.get(position).getDesc());
+        holder.header.setText(menuBulletList.get(position).getHeader()); // for userList -> username
+        holder.desc.setText(menuBulletList.get(position).getDesc());  // for userList -> status
         holder.catImage.setImageResource(menuBulletList.get(position).getCatImage());
+        MenuBullet menuBullet = menuBulletList.get(position);
+        if (menuBullet.getUser_photo().equals("default")){
+            holder.user_photo.setImageResource(R.drawable.person_icon);
+        }
+        else {
+            Picasso.get().load(menuBullet.getUser_photo()).into(holder.user_photo); // for userList
+        }
         holder.questions_quantity.setText(String.valueOf(menuBulletList.get(position).getQuestions()));
 
     }
@@ -58,6 +74,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
     public class Holder extends RecyclerView.ViewHolder {
 
         TextView header, desc, questions_quantity;
+        CircleImageView user_photo;
         ImageView catImage, circle_red;
         public Holder(@NonNull View itemView, RecycleOnClickListener listener) {
             super(itemView);
@@ -66,11 +83,18 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
             desc = itemView.findViewById(R.id.main_desc);
             circle_red = itemView.findViewById(R.id.circle_red);
             questions_quantity = itemView.findViewById(R.id.questions_quantity);
+            user_photo = itemView.findViewById(R.id.user_photo);
+            catImage = itemView.findViewById(R.id.catImage);
+
             if (fragment == 1){
                 questions_quantity.setVisibility(View.VISIBLE);
                 circle_red.setVisibility(View.VISIBLE);
             }
-            catImage = itemView.findViewById(R.id.catImage);
+
+            if (fragment == 2){
+                user_photo.setVisibility(View.VISIBLE);
+                catImage.setVisibility(View.GONE);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

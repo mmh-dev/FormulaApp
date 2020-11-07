@@ -72,6 +72,11 @@ public class SecondMenuFragment extends Fragment {
                         .replace(R.id.fragment_container, articleFragment).
                         addToBackStack("SecondMenu").commit();
             }
+
+            @Override
+            public void onDeleteClick(int position) {
+
+            }
         });
         return view;
     }
