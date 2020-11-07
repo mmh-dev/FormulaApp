@@ -15,8 +15,8 @@
     <string name="or">- или -</string>
     <string name="register">регистрация пользователя</string>
     <string name="your_name">Ваше имя</string>
-    <string name="intern">Я Стажер</string>
-    <string name="employee">Я сотрудник</string>
+    <string name="intern">Стажер</string>
+    <string name="employee">Cотрудник</string>
     <string name="registation_agreement_text">Выполняя регистрацию, Вы соглашаетесь с условиями</string>
     <string name="privacy_policy">Политики конфиденциальности</string>
     <string name="privacy_policy1">Политикa конфиденциальности</string>
@@ -288,5 +288,8 @@
     <string name="No">Нет</string>
     <string name="delete">Удалить</string>
     <string name="delete_question_dialog_title">Удаление тестового вопроса</string>
+    <string name="delete_user_dialog_title">Удаление пользователя</string>
+    <string name="delete_user_dialog_message">Вы действительно хотите удалить этого пользователя? Все данные этого пользователя, включая баллы и рейтинг, будут потеряны. Данное действие нельзя отменить</string>
+    <string name="user_deleted_toast">Пользователь успешно удален!</string>
 
 </resources>

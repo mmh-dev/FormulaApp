@@ -180,7 +180,7 @@
         android:id="@+id/next_question_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_red_question"
         android:paddingEnd="20dp"

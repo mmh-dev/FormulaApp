@@ -1,5 +1,7 @@
 package com.example.formulaapp.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.formulaapp.Adapters.MainMenuAdapter;
 import com.example.formulaapp.Models.MenuBullet;
+import com.example.formulaapp.Models.Question;
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,38 +51,72 @@ public class ManageUserFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userList.clear();
+        adapter = new MainMenuAdapter(userList, getContext(), 2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User u = dataSnapshot.getValue(User.class);
                     if (!u.getId().equals(firebaseUser.getUid())){
-                        userList.add(new MenuBullet(u.getUsername(), u.getStatus(), 0, u.getImageUrl(), 0));
+                        userList.add(new MenuBullet(u.getUsername(), u.getStatus(), 0, u.getImageUrl(), 0, u.getEmail()));
                     }
                 }
-                adapter = new MainMenuAdapter(userList, getContext(), 2);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
+        adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                RatingFragment ratingFragment = new RatingFragment();
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, ratingFragment).
+                        addToBackStack("ManageUsers").commit();
+            }
 
-//        adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                SecondMenuFragment secondMenuFragment = new SecondMenuFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("header", menuBulletList.get(position).getHeader());
-//                secondMenuFragment.setArguments(bundle);
-//                getFragmentManager().beginTransaction()
-//                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
-//                        .replace(R.id.fragment_container, secondMenuFragment).
-//                        addToBackStack("MainMenu").commit();
-//            }
-//        });
+            @Override
+            public void onDeleteClick(int position) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle(R.string.delete_user_dialog_title);
+                dialog.setMessage(R.string.delete_user_dialog_message).setCancelable(false);
+                dialog.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    User u = dataSnapshot.getValue(User.class);
+                                    assert u != null;
+                                    if (u.getEmail().equals(userList.get(position).getUser_email())) {
+                                        reference.child(u.getId()).removeValue();
+                                        userList.remove(position);
+                                        adapter.notifyDataSetChanged();
+                                        Toast.makeText(getContext(), getString(R.string.user_deleted_toast), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    }
+                });
+                dialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialog.create().show();
+            }
+        });
 
         return view;
     }

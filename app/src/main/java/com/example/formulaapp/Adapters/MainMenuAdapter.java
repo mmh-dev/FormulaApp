@@ -55,12 +55,14 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
         holder.header.setText(menuBulletList.get(position).getHeader()); // for userList -> username
         holder.desc.setText(menuBulletList.get(position).getDesc());  // for userList -> status
         holder.catImage.setImageResource(menuBulletList.get(position).getCatImage());
-        MenuBullet menuBullet = menuBulletList.get(position);
-        if (menuBullet.getUser_photo().equals("default")){
-            holder.user_photo.setImageResource(R.drawable.person_icon);
-        }
-        else {
-            Picasso.get().load(menuBullet.getUser_photo()).into(holder.user_photo); // for userList
+        if (fragment == 2){
+            MenuBullet menuBullet = menuBulletList.get(position);
+            if (menuBullet.getUser_photo().equals("default")){
+                holder.user_photo.setImageResource(R.drawable.person_icon);
+            }
+            else {
+                Picasso.get().load(menuBullet.getUser_photo()).into(holder.user_photo); // for userList
+            }
         }
         holder.questions_quantity.setText(String.valueOf(menuBulletList.get(position).getQuestions()));
 
@@ -75,7 +77,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
 
         TextView header, desc, questions_quantity;
         CircleImageView user_photo;
-        ImageView catImage, circle_red;
+        ImageView catImage, circle_red, delete_user;
         public Holder(@NonNull View itemView, RecycleOnClickListener listener) {
             super(itemView);
 
@@ -85,6 +87,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
             questions_quantity = itemView.findViewById(R.id.questions_quantity);
             user_photo = itemView.findViewById(R.id.user_photo);
             catImage = itemView.findViewById(R.id.catImage);
+            delete_user = itemView.findViewById(R.id.delete_user);
 
             if (fragment == 1){
                 questions_quantity.setVisibility(View.VISIBLE);
@@ -94,6 +97,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
             if (fragment == 2){
                 user_photo.setVisibility(View.VISIBLE);
                 catImage.setVisibility(View.GONE);
+                delete_user.setVisibility(View.VISIBLE);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -103,10 +107,20 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Holder
                     listener.onItemClick(position);
                 }
             });
+
+            if (fragment == 2){
+                delete_user.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onDeleteClick(getAdapterPosition());
+                    }
+                });
+            }
         }
     }
 
     public interface RecycleOnClickListener{
         void onItemClick (int position);
+        void onDeleteClick (int position);
     }
 }

@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
         status_intern_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setStatus("intern");
+                user.setStatus(getResources().getString(R.string.intern));
                 status_intern_btn.setBackgroundResource(R.drawable.status_btn_yellow);
                 status_employee_btn.setBackgroundResource(R.drawable.status_btn_grey);
             }
@@ -71,7 +71,7 @@ public class Register extends AppCompatActivity {
         status_employee_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setStatus("employee");
+                user.setStatus(getResources().getString(R.string.employee));
                 status_employee_btn.setBackgroundResource(R.drawable.status_btn_yellow);
                 status_intern_btn.setBackgroundResource(R.drawable.status_btn_grey);
             }
