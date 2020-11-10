@@ -5,13 +5,13 @@ public class MenuBullet {
     private String desc;
     private int catImage;
     private String user_photo;
-    private int questions;
+    private Integer questions;
     private String user_email;
 
     public MenuBullet() {
     }
 
-    public MenuBullet(String header, String desc, int catImage, String user_photo, int questions, String user_email) {
+    public MenuBullet(String header, String desc, int catImage, String user_photo, Integer questions, String user_email) {
         this.header = header;
         this.desc = desc;
         this.catImage = catImage;
@@ -32,11 +32,11 @@ public class MenuBullet {
         return catImage;
     }
 
-    public int getQuestions() {
+    public Integer getQuestions() {
         return questions;
     }
 
-    public void setQuestions(int questions) {
+    public void setQuestions(Integer questions) {
         this.questions = questions;
     }
 

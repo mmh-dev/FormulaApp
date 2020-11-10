@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EditTestCategoriesFragment extends Fragment {
 
@@ -39,6 +40,7 @@ public class EditTestCategoriesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
         getActivity().setTitle(getString(R.string.edit_test));
+        reference = FirebaseDatabase.getInstance().getReference("Questions");
         fillMenuList();
 
         adapter = new MainMenuAdapter(menuBulletList, getContext(), 1);
@@ -71,40 +73,51 @@ public class EditTestCategoriesFragment extends Fragment {
         menuBulletList.clear();
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         String[] descCats = getResources().getStringArray(R.array.main_categories_desc);
-        reference = FirebaseDatabase.getInstance().getReference("Questions");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Question question = dataSnapshot.getValue(Question.class);
-                    if (question != null) {
-                        if (question.getCategory().equals("Двигатель")) {
+                    switch (Objects.requireNonNull(question).getCategory()) {
+                        case "Двигатель":
                             count[0]++;
-                        }else if (question.getCategory().equals("Трансмиссия")) {
+                            break;
+                        case "Трансмиссия":
                             count[1]++;
-                        }else  if (question.getCategory().equals("Подвеска")) {
+                            break;
+                        case "Подвеска":
                             count[2]++;
-                        }else  if (question.getCategory().equals("Рулевое управление")) {
+                            break;
+                        case "Рулевое управление":
                             count[3]++;
-                        }else  if (question.getCategory().equals("Система охлаждения")) {
+                            break;
+                        case "Система охлаждения":
                             count[4]++;
-                        }else  if (question.getCategory().equals("Система зажигания")) {
+                            break;
+                        case "Система зажигания":
                             count[5]++;
-                        } else if (question.getCategory().equals("Топливная система")) {
+                            break;
+                        case "Топливная система":
                             count[6]++;
-                        }else  if (question.getCategory().equals("Тормозная система")) {
+                            break;
+                        case "Тормозная система":
                             count[7]++;
-                        }else  if (question.getCategory().equals("Электрооборудование")) {
+                            break;
+                        case "Электрооборудование":
                             count[8]++;
-                        }else  if (question.getCategory().equals("Датчики")) {
+                            break;
+                        case "Датчики":
                             count[9]++;
-                        }else  if (question.getCategory().equals("Кузов")) {
+                            break;
+                        case "Кузов":
                             count[10]++;
-                        }else  if (question.getCategory().equals("Салон")) {
+                            break;
+                        case "Салон":
                             count[11]++;
-                        } else {
+                            break;
+                        default:
                             count[12]++;
-                        }
+                            break;
                     }
                 }
                 }
