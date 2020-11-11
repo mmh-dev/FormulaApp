@@ -200,10 +200,8 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()){
                             firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
-
                             reference = FirebaseDatabase.getInstance().getReference("Users")
                                     .child(userId);
-
                             user.setId(userId);
                             user.setUsername(firebaseUser.getDisplayName());
                             user.setEmail(firebaseUser.getEmail());

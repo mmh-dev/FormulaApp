@@ -281,7 +281,7 @@
     <string name="question_is_saved">Вопрос сохранен!</string>
     <string name="fill_all_fields">Заполните все поля!</string>
     <string name="question_deleted">Вопрос успешно удален!</string>
-    <string name="correct_answer"> - Правильный ответ</string>
+    <string name="correct_answer">Правильный ответ</string>
     <string name="choose_correct_answer">Отметьте правильный ответ!</string>
     <string name="delete_alert_dialog_message">Вы действительно хотите удалить этот вопрос? Это действие нельзя отменить</string>
     <string name="yes">Да</string>
@@ -291,5 +291,6 @@
     <string name="delete_user_dialog_title">Удаление пользователя</string>
     <string name="delete_user_dialog_message">Вы действительно хотите удалить этого пользователя? Все данные этого пользователя, включая баллы и рейтинг, будут потеряны. Данное действие нельзя отменить</string>
     <string name="user_deleted_toast">Пользователь успешно удален!</string>
+    <string name="corrent_answer">\"Неправильно! Правильный ответ - \"</string>
 
 </resources>
