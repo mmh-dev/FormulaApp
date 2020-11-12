@@ -17,7 +17,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         app:fillColor="#00AAAAAA"
         app:progressColor="@color/colorYellow"
         app:progressRoundCap="true"
@@ -28,9 +27,7 @@
         app:progressWidth="12dp"
         app:startAngle="270"
         app:totalColor="@color/colorPrimaryDark"
-        app:totalWidth="3dp"
-
-        />
+        app:totalWidth="3dp"/>
 
     <TextView
         android:id="@+id/questions_passed"
@@ -111,65 +108,82 @@
         app:layout_constraintStart_toEndOf="@+id/progressBar"
         app:layout_constraintTop_toBottomOf="@+id/points" />
 
-    <Button
-        android:id="@+id/question_1_btn"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/btn_blue_google"
-        android:paddingStart="20dp"
-        android:text="variant 1"
-        android:textAlignment="viewStart"
+        android:text="Question text"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/question_2_btn"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/question_1_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/question_1_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/btn_blue_google"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        android:text="variant 1 erhgyregrgguregure guuruuregu ggrrrggrgregrhh r hrh  rhrr he ehurerhgur uer "
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/question_2_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
+    <TextView
         android:id="@+id/question_2_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/btn_blue_google"
-        android:paddingStart="20dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
         android:text="variant 2"
-        android:textAlignment="viewStart"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/question_3_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_1_btn" />
 
-    <Button
+    <TextView
         android:id="@+id/question_3_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/btn_blue_google"
-        android:paddingStart="20dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
         android:text="variant 3"
-        android:textAlignment="viewStart"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/question_4_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_2_btn" />
 
-    <Button
+    <TextView
         android:id="@+id/question_4_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/btn_blue_google"
-        android:paddingStart="20dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
         android:text="variant 4"
-        android:textAlignment="viewStart"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/next_question_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -180,30 +194,28 @@
         android:id="@+id/next_question_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/btn_red_question"
-        android:text="@string/next_question"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:text="@string/next_question"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_4_btn" />
 
-    <TextView
-        android:id="@+id/question_text"
+    <Button
+        android:id="@+id/submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Question text"
-        android:textSize="18sp"
+        android:background="@drawable/btn_red_question"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:visibility="gone"
+        android:text="@string/save"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/question_1_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
+        app:layout_constraintTop_toBottomOf="@+id/question_4_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

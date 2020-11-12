@@ -6,18 +6,20 @@ import java.util.List;
 public class TestData implements Serializable {
     private String header;
     private boolean isFinal;
-    private int points;
-    private int totalQuestionsNumber;
+    private double points;
+    private double totalQuestionsNumber;
     private List<Question> questionList;
     private User user;
+    private int count;
 
-    public TestData(String header, boolean isFinal, int points, int totalQuestionsNumber, List<Question> questionList, User user) {
+    public TestData(String header, boolean isFinal, double points, double totalQuestionsNumber, List<Question> questionList, User user, int count) {
         this.header = header;
         this.isFinal = isFinal;
         this.points = points;
         this.totalQuestionsNumber = totalQuestionsNumber;
         this.questionList = questionList;
         this.user = user;
+        this.count = count;
     }
 
     public String getHeader() {
@@ -36,19 +38,19 @@ public class TestData implements Serializable {
         isFinal = aFinal;
     }
 
-    public int getPoints() {
+    public double getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(double points) {
         this.points = points;
     }
 
-    public int getTotalQuestionsNumber() {
+    public double getTotalQuestionsNumber() {
         return totalQuestionsNumber;
     }
 
-    public void setTotalQuestionsNumber(int totalQuestionsNumber) {
+    public void setTotalQuestionsNumber(double totalQuestionsNumber) {
         this.totalQuestionsNumber = totalQuestionsNumber;
     }
 
@@ -66,5 +68,13 @@ public class TestData implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

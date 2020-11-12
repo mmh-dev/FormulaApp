@@ -223,14 +223,14 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Toast.makeText(Register.this, "Пользователь успешно зарегистрирован!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Register.this, getString(R.string.registration_finished), Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(Register.this, MainActivity.class));
                                     }
                                 }
                             });
                         }
                         else {
-                            Toast.makeText(Register.this, "Ошибка регистрации", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, getString(R.string.registration_error), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

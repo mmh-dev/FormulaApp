@@ -11,18 +11,17 @@
     <EditText
         android:id="@+id/question_body"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="130dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_border_sharp"
         android:gravity="top|left"
+        android:maxLength="130"
         android:hint="@string/question_text"
         android:inputType="textMultiLine"
         android:padding="5dp"
         android:textAlignment="gravity"
         android:textSize="18sp"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +33,6 @@
         android:background="@drawable/btn_border_sharp"
         app:layout_constraintBottom_toTopOf="@+id/const2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_body"
         app:layout_constraintVertical_chainStyle="packed">
@@ -60,6 +58,7 @@
             android:hint="@string/answer_variant"
             android:inputType="textPersonName"
             android:textSize="16sp"
+            android:maxLength="80"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/checkBox1"
             app:layout_constraintStart_toEndOf="@+id/textView1"
@@ -141,7 +140,6 @@
         android:background="@drawable/btn_border_sharp"
         app:layout_constraintBottom_toTopOf="@+id/const4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/const2">
 
@@ -248,7 +246,6 @@
         android:text="@string/save"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cancel_btn"
         app:layout_constraintTop_toBottomOf="@+id/const4" />
 
@@ -262,7 +259,6 @@
         android:background="@drawable/btn_gray"
         android:text="@string/cancel"
         app:layout_constraintEnd_toStartOf="@+id/save_question_btn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/const4" />
 
@@ -272,7 +268,6 @@
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cancel_btn"
@@ -286,7 +281,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/checkBox" />
 
@@ -300,7 +294,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/checkBox"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toTopOf="@+id/checkBox" />
 

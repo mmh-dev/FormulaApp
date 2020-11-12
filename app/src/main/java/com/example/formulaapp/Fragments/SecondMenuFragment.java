@@ -45,6 +45,7 @@ public class SecondMenuFragment extends Fragment {
     DatabaseReference referenceQuestion;
     User user;
     List<Question> questionList = new ArrayList<>();
+    double totalQuestionsNumber = 0;
     ValueEventListener listener;
 
     @Override
@@ -98,7 +99,13 @@ public class SecondMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 TestFragment testFragment = new TestFragment();
-                TestData testData = new TestData(header, false, 0, questionList.size(), questionList, user);
+                if (questionList.size() >= 20){
+                    totalQuestionsNumber = 20;
+                }
+                else {
+                    totalQuestionsNumber = questionList.size();
+                }
+                TestData testData = new TestData(header, false, 0, totalQuestionsNumber, questionList, user, 0);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("testData", testData);
                 testFragment.setArguments(bundle);
