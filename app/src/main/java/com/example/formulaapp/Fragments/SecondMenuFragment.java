@@ -41,8 +41,7 @@ public class SecondMenuFragment extends Fragment {
     Button start_test_btn;
     String header;
     FirebaseUser firebaseUser;
-    DatabaseReference referenceUser;
-    DatabaseReference referenceQuestion;
+    DatabaseReference referenceUser, referenceQuestion;
     User user;
     List<Question> questionList = new ArrayList<>();
     double totalQuestionsNumber = 0;
@@ -93,7 +92,6 @@ public class SecondMenuFragment extends Fragment {
             }
         });
         Collections.shuffle(questionList);
-        Log.i("list", String.valueOf(questionList.size()));
 
         start_test_btn.setOnClickListener(new View.OnClickListener() {
             @Override

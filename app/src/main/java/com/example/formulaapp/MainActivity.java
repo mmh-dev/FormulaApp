@@ -28,6 +28,8 @@ import com.example.formulaapp.Fragments.SavedPagesFragment;
 import com.example.formulaapp.Fragments.SpravochnikFragment;
 import com.example.formulaapp.Fragments.TestFragment;
 import com.example.formulaapp.Fragments.UserRatingFragment;
+import com.example.formulaapp.Models.Question;
+import com.example.formulaapp.Models.TestData;
 import com.example.formulaapp.Models.User;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     FirebaseUser firebaseUser;
-    DatabaseReference reference;
     CircleImageView user_photo;
     TextView username, user_email;
+    DatabaseReference referenceUser, referenceQuestion;
+    User user;
+    List<Question> questionList = new ArrayList<>();
+    double totalQuestionsNumber = 0;
+    ValueEventListener listener;
 
     @Override
     public void onBackPressed() {
@@ -111,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -122,14 +129,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         View headNavView = navigationView.getHeaderView(0);
-        user_photo = (CircleImageView) headNavView.findViewById(R.id.nav_user_photo);
-        username = (TextView) headNavView.findViewById(R.id.nav_username);
-        user_email = (TextView) headNavView.findViewById(R.id.nav_user_email);
+        user_photo = headNavView.findViewById(R.id.nav_user_photo);
+        username = headNavView.findViewById(R.id.nav_username);
+        user_email = headNavView.findViewById(R.id.nav_user_email);
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        listener = referenceUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
+                user = snapshot.getValue(User.class);
                 if (user != null) {
                     username.setText(user.getUsername());
                     user_email.setText(user.getEmail());
@@ -147,6 +154,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        referenceQuestion = FirebaseDatabase.getInstance().getReference("Questions");
+        listener = referenceQuestion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Question q = dataSnapshot.getValue(Question.class);
+                    questionList.add(q);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        Collections.shuffle(questionList);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -172,8 +194,21 @@ public class MainActivity extends AppCompatActivity {
                                 replace(R.id.fragment_container, new SavedPagesFragment()).commit();
                         break;
                     case R.id.final_test:
-                        getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, new TestFragment()).commit();
+                        if (questionList.size() >= 50){
+                            totalQuestionsNumber = 50;
+                        }
+                        else {
+                            totalQuestionsNumber = questionList.size();
+                        }
+                        TestFragment testFragment = new TestFragment();
+                        TestData testData = new TestData(getString(R.string.final_test), true, 0, totalQuestionsNumber, questionList, user, 0);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("testData", testData);
+                        testFragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, testFragment).
+                                addToBackStack("Main Menu").commit();
                         break;
                     case R.id.edit_test:
                         getSupportFragmentManager().beginTransaction().

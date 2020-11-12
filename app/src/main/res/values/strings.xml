@@ -295,5 +295,6 @@
     <string name="registration_finished">Пользователь успешно зарегистрирован!</string>
     <string name="registration_error">Ошибка регистрации</string>
     <string name="data_saved_on_server">Данные сохранены на сервере!</string>
+    <string name="final_test">Финальный тест</string>
 
 </resources>
