@@ -19,8 +19,6 @@ public class AboutAppFragment extends Fragment {
 
     TextView app_version, os_version, device_model, dev_email;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

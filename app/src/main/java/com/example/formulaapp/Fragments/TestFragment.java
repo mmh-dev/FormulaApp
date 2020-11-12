@@ -167,46 +167,51 @@ public class TestFragment extends Fragment {
                             totalPoints++;
                             break;
                     }
-                    switch (questionList.get(0).getCategory()){
-                        case "Двигатель":
-                            user.setDvigatel(user.getDvigatel() + 1);
-                            break;
-                        case "Трансмиссия":
-                            user.setTransmissiya(user.getTransmissiya() + 1);
-                            break;
-                        case "Подвеска":
-                            user.setPodveska(user.getPodveska() + 1);
-                            break;
-                        case "Рулевое управление":
-                            user.setRul(user.getRul() + 1);
-                            break;
-                        case "Система охлаждения":
-                            user.setOhlazhdeniye(user.getOhlazhdeniye() + 1);
-                            break;
-                        case "Система зажигания":
-                            user.setZajiganiye(user.getZajiganiye() + 1);
-                            break;
-                        case "Топливная система":
-                            user.setToplivo(user.getToplivo() + 1);
-                            break;
-                        case "Тормозная система":
-                            user.setTormoz(user.getTormoz() + 1);
-                            break;
-                        case "Электрооборудование":
-                            user.setElectro(user.getElectro() + 1);
-                            break;
-                        case "Датчики":
-                            user.setDatchiki(user.getDatchiki() + 1);
-                            break;
-                        case "Кузов":
-                            user.setKuzov(user.getKuzov() + 1);
-                            break;
-                        case "Салон":
-                            user.setSalon(user.getSalon() + 1);
-                            break;
-                        case "Масла":
-                            user.setMasla(user.getMasla() + 1);
-                            break;
+                    if (isFinal){
+                        user.setTotalPoints((int)totalPoints);
+                    }
+                    else {
+                        switch (questionList.get(0).getCategory()){
+                            case "Двигатель":
+                                user.setDvigatel((int)totalPoints);
+                                break;
+                            case "Трансмиссия":
+                                user.setTransmissiya((int)totalPoints);
+                                break;
+                            case "Подвеска":
+                                user.setPodveska((int)totalPoints);
+                                break;
+                            case "Рулевое управление":
+                                user.setRul((int)totalPoints);
+                                break;
+                            case "Система охлаждения":
+                                user.setOhlazhdeniye((int)totalPoints);
+                                break;
+                            case "Система зажигания":
+                                user.setZajiganiye((int)totalPoints);
+                                break;
+                            case "Топливная система":
+                                user.setToplivo((int)totalPoints);
+                                break;
+                            case "Тормозная система":
+                                user.setTormoz((int)totalPoints);
+                                break;
+                            case "Электрооборудование":
+                                user.setElectro((int)totalPoints);
+                                break;
+                            case "Датчики":
+                                user.setDatchiki((int)totalPoints);
+                                break;
+                            case "Кузов":
+                                user.setKuzov((int)totalPoints);
+                                break;
+                            case "Салон":
+                                user.setSalon((int)totalPoints);
+                                break;
+                            case "Масла":
+                                user.setMasla((int)totalPoints);
+                                break;
+                        }
                     }
                     progressBar.setProgress(((int)(totalPoints/totalQuestionsNumber*100)), true);
                     points.setText(String.valueOf((int)totalPoints));
@@ -280,46 +285,51 @@ public class TestFragment extends Fragment {
                             totalPoints++;
                             break;
                     }
-                    switch (questionList.get(0).getCategory()){
-                        case "Двигатель":
-                            user.setDvigatel(user.getDvigatel() + 1);
-                            break;
-                        case "Трансмиссия":
-                            user.setTransmissiya(user.getTransmissiya() + 1);
-                            break;
-                        case "Подвеска":
-                            user.setPodveska(user.getPodveska() + 1);
-                            break;
-                        case "Рулевое управление":
-                            user.setRul(user.getRul() + 1);
-                            break;
-                        case "Система охлаждения":
-                            user.setOhlazhdeniye(user.getOhlazhdeniye() + 1);
-                            break;
-                        case "Система зажигания":
-                            user.setZajiganiye(user.getZajiganiye() + 1);
-                            break;
-                        case "Топливная система":
-                            user.setToplivo(user.getToplivo() + 1);
-                            break;
-                        case "Тормозная система":
-                            user.setTormoz(user.getTormoz() + 1);
-                            break;
-                        case "Электрооборудование":
-                            user.setElectro(user.getElectro() + 1);
-                            break;
-                        case "Датчики":
-                            user.setDatchiki(user.getDatchiki() + 1);
-                            break;
-                        case "Кузов":
-                            user.setKuzov(user.getKuzov() + 1);
-                            break;
-                        case "Салон":
-                            user.setSalon(user.getSalon() + 1);
-                            break;
-                        case "Масла":
-                            user.setMasla(user.getMasla() + 1);
-                            break;
+                    if (isFinal){
+                        user.setTotalPoints((int)totalPoints);
+                    }
+                    else {
+                        switch (questionList.get(0).getCategory()){
+                            case "Двигатель":
+                                user.setDvigatel((int)totalPoints);
+                                break;
+                            case "Трансмиссия":
+                                user.setTransmissiya((int)totalPoints);
+                                break;
+                            case "Подвеска":
+                                user.setPodveska((int)totalPoints);
+                                break;
+                            case "Рулевое управление":
+                                user.setRul((int)totalPoints);
+                                break;
+                            case "Система охлаждения":
+                                user.setOhlazhdeniye((int)totalPoints);
+                                break;
+                            case "Система зажигания":
+                                user.setZajiganiye((int)totalPoints);
+                                break;
+                            case "Топливная система":
+                                user.setToplivo((int)totalPoints);
+                                break;
+                            case "Тормозная система":
+                                user.setTormoz((int)totalPoints);
+                                break;
+                            case "Электрооборудование":
+                                user.setElectro((int)totalPoints);
+                                break;
+                            case "Датчики":
+                                user.setDatchiki((int)totalPoints);
+                                break;
+                            case "Кузов":
+                                user.setKuzov((int)totalPoints);
+                                break;
+                            case "Салон":
+                                user.setSalon((int)totalPoints);
+                                break;
+                            case "Масла":
+                                user.setMasla((int)totalPoints);
+                                break;
+                        }
                     }
                     progressBar.setProgress(((int)(totalPoints/totalQuestionsNumber*100)), true);
                     points.setText(String.valueOf((int)totalPoints));

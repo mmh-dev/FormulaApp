@@ -22,11 +22,12 @@ public class User implements Serializable {
     private Integer kuzov;
     private Integer salon;
     private Integer masla;
+    private Integer totalPoints;
 
     public User() {
     }
 
-    public User(String id, String email, String username, String imageUrl, String status, Integer dvigatel, Integer transmissiya, Integer podveska, Integer rul, Integer ohlazhdeniye, Integer zajiganiye, Integer toplivo, Integer tormoz, Integer electro, Integer datchiki, Integer kuzov, Integer salon, Integer masla) {
+    public User(String id, String email, String username, String imageUrl, String status, Integer dvigatel, Integer transmissiya, Integer podveska, Integer rul, Integer ohlazhdeniye, Integer zajiganiye, Integer toplivo, Integer tormoz, Integer electro, Integer datchiki, Integer kuzov, Integer salon, Integer masla, Integer totalPoints) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -45,6 +46,7 @@ public class User implements Serializable {
         this.kuzov = kuzov;
         this.salon = salon;
         this.masla = masla;
+        this.totalPoints = totalPoints;
     }
 
     public String getId() {
@@ -189,5 +191,13 @@ public class User implements Serializable {
 
     public void setMasla(Integer masla) {
         this.masla = masla;
+    }
+
+    public Integer getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(Integer totalPoints) {
+        this.totalPoints = totalPoints;
     }
 }
