@@ -296,5 +296,10 @@
     <string name="registration_error">Ошибка регистрации</string>
     <string name="data_saved_on_server">Данные сохранены на сервере!</string>
     <string name="final_test">Финальный тест</string>
+    <string name="app_version">Версия приложения</string>
+    <string name="os_version">Версия Android</string>
+    <string name="device_model">Модель устройства</string>
+    <string name="developer">Разработчик</string>
+    <string name="developer_info">Мурод Ходжаев</string>
 
 </resources>
