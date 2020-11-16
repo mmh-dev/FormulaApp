@@ -24,6 +24,7 @@ public class AboutAppFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_app, container, false);
 
+        getActivity().setTitle(getString(R.string.about_app));
         app_version = view.findViewById(R.id.app_version);
         os_version = view.findViewById(R.id.os_version);
         device_model = view.findViewById(R.id.device_model);

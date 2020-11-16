@@ -301,5 +301,6 @@
     <string name="device_model">Модель устройства</string>
     <string name="developer">Разработчик</string>
     <string name="developer_info">Мурод Ходжаев</string>
+    <string name="сategories">Категории</string>
 
 </resources>

@@ -182,12 +182,22 @@ public class MainActivity extends AppCompatActivity {
                                 replace(R.id.fragment_container, new MainMenuFragment()).commit();
                         break;
                     case R.id.rating:
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("isManager", false);
+                        RatingFragment ratingFragment = new RatingFragment();
+                        ratingFragment.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, new RatingFragment()).commit();
+                                replace(R.id.fragment_container, ratingFragment)
+                                .addToBackStack("Main Menu").commit();
                         break;
                     case R.id.users_rating:
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putBoolean("isManager", true);
+                        RatingFragment ratingFragment1 = new RatingFragment();
+                        ratingFragment1.setArguments(bundle1);
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, new UserRatingFragment()).commit();
+                                replace(R.id.fragment_container, ratingFragment1)
+                                .addToBackStack("Main Menu").commit();
                         break;
                     case R.id.saved_pages:
                         getSupportFragmentManager().beginTransaction().
@@ -202,11 +212,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         TestFragment testFragment = new TestFragment();
                         TestData testData = new TestData(getString(R.string.final_test), true, 0, totalQuestionsNumber, questionList, user, 0);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("testData", testData);
-                        testFragment.setArguments(bundle);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putSerializable("testData", testData);
+                        testFragment.setArguments(bundle2);
                         getSupportFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
                                 .replace(R.id.fragment_container, testFragment).
                                 addToBackStack("Main Menu").commit();
                         break;
