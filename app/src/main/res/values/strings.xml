@@ -302,5 +302,7 @@
     <string name="developer">Разработчик</string>
     <string name="developer_info">Мурод Ходжаев</string>
     <string name="сategories">Категории</string>
+    <string name="max_points_among_users">Наивысший балл среди пользователей</string>
+    <string name="my_points">Мой балл</string>
 
 </resources>

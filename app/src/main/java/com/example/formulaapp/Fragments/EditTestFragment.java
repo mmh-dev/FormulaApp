@@ -59,6 +59,7 @@ public class EditTestFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                questionsList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Question question = dataSnapshot.getValue(Question.class);
                     assert question != null;
@@ -85,7 +86,7 @@ public class EditTestFragment extends Fragment {
                 addNewQuestionFragment.setArguments(bundle);
                 if (getFragmentManager() != null) {
                     getFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
                             .replace(R.id.fragment_container, addNewQuestionFragment).
                             addToBackStack("Edit Questions").commit();
                 }

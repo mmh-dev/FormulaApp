@@ -32,7 +32,6 @@ public class EditTestCategoriesFragment extends Fragment {
     RecyclerView recyclerView;
     MainMenuAdapter adapter;
     DatabaseReference reference;
-    int[] count = new int[13];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,41 +40,15 @@ public class EditTestCategoriesFragment extends Fragment {
 
         getActivity().setTitle(getString(R.string.edit_test));
         reference = FirebaseDatabase.getInstance().getReference("Questions");
-        fillMenuList();
-
-        adapter = new MainMenuAdapter(menuBulletList, getContext(), 1);
         recyclerView = view.findViewById(R.id.main_menu);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                EditTestFragment editTestFragment = new EditTestFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("header", menuBulletList.get(position).getHeader());
-                editTestFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, editTestFragment).
-                        addToBackStack("EditTestMainMenu").commit();
-            }
-
-            @Override
-            public void onDeleteClick(int position) {
-
-            }
-        });
-        return view;
-    }
-
-    private void fillMenuList() {
         menuBulletList.clear();
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         String[] descCats = getResources().getStringArray(R.array.main_categories_desc);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int[] count = new int[13];
+                menuBulletList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Question question = dataSnapshot.getValue(Question.class);
                     switch (Objects.requireNonNull(question).getCategory()) {
@@ -120,23 +93,47 @@ public class EditTestCategoriesFragment extends Fragment {
                             break;
                     }
                 }
-                }
+                menuBulletList.add(new MenuBullet(manCats[0], descCats[0], R.drawable.engine, null, count[0], null));
+                menuBulletList.add(new MenuBullet(manCats[1], descCats[1], R.drawable.gearbox, null, count[1], null));
+                menuBulletList.add(new MenuBullet(manCats[2], descCats[2], R.drawable.transmission, null, count[2], null));
+                menuBulletList.add(new MenuBullet(manCats[3], descCats[3], R.drawable.steering_wheel, null, count[3], null));
+                menuBulletList.add(new MenuBullet(manCats[4], descCats[4], R.drawable.cooling, null, count[4], null));
+                menuBulletList.add(new MenuBullet(manCats[5], descCats[5], R.drawable.igniting, null, count[5], null));
+                menuBulletList.add(new MenuBullet(manCats[6], descCats[6], R.drawable.fuel, null, count[6], null));
+                menuBulletList.add(new MenuBullet(manCats[7], descCats[7], R.drawable.brakes, null, count[7], null));
+                menuBulletList.add(new MenuBullet(manCats[8], descCats[8], R.drawable.electric, null, count[8], null));
+                menuBulletList.add(new MenuBullet(manCats[9], descCats[9], R.drawable.sensors, null, count[9], null));
+                menuBulletList.add(new MenuBullet(manCats[10], descCats[10], R.drawable.car_body, null, count[10], null));
+                menuBulletList.add(new MenuBullet(manCats[11], descCats[11], R.drawable.salon, null, count[11], null));
+                menuBulletList.add(new MenuBullet(manCats[12], descCats[12], R.drawable.oil, null, count[12], null));
+
+                adapter = new MainMenuAdapter(menuBulletList, getContext(), 1);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(adapter);
+
+                adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        EditTestFragment editTestFragment = new EditTestFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("header", menuBulletList.get(position).getHeader());
+                        editTestFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, editTestFragment).
+                                addToBackStack("EditTestMainMenu").commit();
+                    }
+                    @Override
+                    public void onDeleteClick(int position) {
+
+                    }
+                });
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        menuBulletList.add(new MenuBullet(manCats[0], descCats[0], R.drawable.engine, null, count[0], null));
-        menuBulletList.add(new MenuBullet(manCats[1], descCats[1], R.drawable.gearbox, null, count[1], null));
-        menuBulletList.add(new MenuBullet(manCats[2], descCats[2], R.drawable.transmission, null, count[2], null));
-        menuBulletList.add(new MenuBullet(manCats[3], descCats[3], R.drawable.steering_wheel, null, count[3], null));
-        menuBulletList.add(new MenuBullet(manCats[4], descCats[4], R.drawable.cooling, null, count[4], null));
-        menuBulletList.add(new MenuBullet(manCats[5], descCats[5], R.drawable.igniting, null, count[5], null));
-        menuBulletList.add(new MenuBullet(manCats[6], descCats[6], R.drawable.fuel, null, count[6], null));
-        menuBulletList.add(new MenuBullet(manCats[7], descCats[7], R.drawable.brakes, null, count[7], null));
-        menuBulletList.add(new MenuBullet(manCats[8], descCats[8], R.drawable.electric, null, count[8], null));
-        menuBulletList.add(new MenuBullet(manCats[9], descCats[9], R.drawable.sensors, null, count[9], null));
-        menuBulletList.add(new MenuBullet(manCats[10], descCats[10], R.drawable.car_body, null, count[10], null));
-        menuBulletList.add(new MenuBullet(manCats[11], descCats[11], R.drawable.salon, null, count[11], null));
-        menuBulletList.add(new MenuBullet(manCats[12], descCats[12], R.drawable.oil, null, count[12], null));
+
+        return view;
     }
 }

@@ -182,22 +182,12 @@ public class MainActivity extends AppCompatActivity {
                                 replace(R.id.fragment_container, new MainMenuFragment()).commit();
                         break;
                     case R.id.rating:
-                        Bundle bundle = new Bundle();
-                        bundle.putBoolean("isManager", false);
-                        RatingFragment ratingFragment = new RatingFragment();
-                        ratingFragment.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, ratingFragment)
-                                .addToBackStack("Main Menu").commit();
+                                replace(R.id.fragment_container, new RatingFragment()).commit();
                         break;
                     case R.id.users_rating:
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putBoolean("isManager", true);
-                        RatingFragment ratingFragment1 = new RatingFragment();
-                        ratingFragment1.setArguments(bundle1);
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, ratingFragment1)
-                                .addToBackStack("Main Menu").commit();
+                                replace(R.id.fragment_container, new UserRatingFragment()).commit();
                         break;
                     case R.id.saved_pages:
                         getSupportFragmentManager().beginTransaction().
