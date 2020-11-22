@@ -29,11 +29,10 @@ public class MyMarkerView extends MarkerView {
         tvContent = findViewById(R.id.tvContent);
     }
 
-    // runs every time the MarkerView is redrawn, can be used to update the
-    // content (user-interface)
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        tvContent.setText(Utils.formatNumber(e.getY(), 0, true));
+        tvContent.setTextSize(14f);
+        tvContent.setText(String.valueOf((int)e.getY()));
         super.refreshContent(e, highlight);
     }
 

@@ -55,5 +55,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.VaibhavLakhera:Circular-Progress-View:0.1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation "com.github.jrizani:JRSpinner:1.0.0"
+    implementation 'com.github.vivchar:RendererRecyclerViewAdapter:3.0.0'
 
 }

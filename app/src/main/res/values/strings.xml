@@ -304,5 +304,7 @@
     <string name="сategories">Категории</string>
     <string name="max_points_among_users">Наивысший балл среди пользователей</string>
     <string name="my_points">Мой балл</string>
+    <string name="your_position">Ваша позиция в рейтинге:</string>
+    <string name="three_leaders">Тройка лидеров:</string>
 
 </resources>

@@ -23,11 +23,12 @@ public class User implements Serializable {
     private Integer salon;
     private Integer masla;
     private Integer totalPoints;
+    private Integer allPoints;
 
     public User() {
     }
 
-    public User(String id, String email, String username, String imageUrl, String status, Integer dvigatel, Integer transmissiya, Integer podveska, Integer rul, Integer ohlazhdeniye, Integer zajiganiye, Integer toplivo, Integer tormoz, Integer electro, Integer datchiki, Integer kuzov, Integer salon, Integer masla, Integer totalPoints) {
+    public User(String id, String email, String username, String imageUrl, String status, Integer dvigatel, Integer transmissiya, Integer podveska, Integer rul, Integer ohlazhdeniye, Integer zajiganiye, Integer toplivo, Integer tormoz, Integer electro, Integer datchiki, Integer kuzov, Integer salon, Integer masla, Integer totalPoints, Integer allPoints) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -47,6 +48,7 @@ public class User implements Serializable {
         this.salon = salon;
         this.masla = masla;
         this.totalPoints = totalPoints;
+        this.allPoints = allPoints;
     }
 
     public String getId() {
@@ -199,5 +201,14 @@ public class User implements Serializable {
 
     public void setTotalPoints(Integer totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public Integer getAllPoints() {
+        Integer points = dvigatel + transmissiya + podveska + rul + ohlazhdeniye + zajiganiye + toplivo + tormoz + electro + datchiki + kuzov + salon + masla + totalPoints;
+        return points;
+    }
+
+    public void setAllPoints(Integer allPoints) {
+        this.allPoints = allPoints;
     }
 }
