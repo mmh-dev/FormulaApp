@@ -306,5 +306,7 @@
     <string name="my_points">Мой балл</string>
     <string name="your_position">Ваша позиция в рейтинге:</string>
     <string name="three_leaders">Тройка лидеров:</string>
+    <string name="choose_category">"Выберите категорию "</string>
+    <string name="show">Показать</string>
 
 </resources>
