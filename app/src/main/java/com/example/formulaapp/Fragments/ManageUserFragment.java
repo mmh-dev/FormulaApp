@@ -69,11 +69,30 @@ public class ManageUserFragment extends Fragment {
         adapter.setOnItemClickListener(new MainMenuAdapter.RecycleOnClickListener() {
             @Override
             public void onItemClick(int position) {
-                RatingFragment ratingFragment = new RatingFragment();
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, ratingFragment).
-                        addToBackStack("ManageUsers").commit();
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User selectedUser = new User();
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            User u = dataSnapshot.getValue(User.class);
+                            assert u != null;
+                            if (u.getEmail().equals(userList.get(position).getUser_email())) {
+                                selectedUser = u;
+                            }
+                        }
+                        RatingFragment ratingFragment = new RatingFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("selectedUser", selectedUser);
+                        ratingFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, ratingFragment).
+                                addToBackStack("ManageUsers").commit();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
 
             @Override

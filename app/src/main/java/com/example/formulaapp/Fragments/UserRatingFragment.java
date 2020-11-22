@@ -3,22 +3,19 @@ package com.example.formulaapp.Fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.RadioGroup;
 
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.R;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -34,25 +31,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import jrizani.jrspinner.JRSpinner;
-
 public class UserRatingFragment extends Fragment {
 
-    SwitchCompat statusSwitch;
-    JRSpinner spinner;
-    Button save;
+    RadioGroup radioGroup;
     BarChart barChart;
     DatabaseReference reference;
     List<User> userList = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_rating, container, false);
-        statusSwitch = view.findViewById(R.id.statusSwitch);
-        spinner = view.findViewById(R.id.cat_spinner);
-        save = view.findViewById(R.id.save_btn_user_rating);
+        radioGroup = view.findViewById(R.id.radioGroup);
         barChart = view.findViewById(R.id.barChart);
         getActivity().setTitle(getString(R.string.users_rating));
 
@@ -62,18 +52,45 @@ public class UserRatingFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<User> filteredList = new ArrayList<>();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
                 }
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                        switch (checkedId){
+                            case R.id.interns:
+                                filteredList.clear();
+                                for (User u: userList) {
+                                    if (u.getStatus().equals("Стажер")){
+                                        filteredList.add(u);
+                                    }
+                                }
+                                createBarChart(filteredList);
+                                return;
+                            case R.id.employees:
+                                filteredList.clear();
+                                for (User u: userList) {
+                                    if (u.getStatus().equals("Сотрудник")){
+                                        filteredList.add(u);
+                                    }
+                                }
+                                createBarChart(filteredList);
+                                return;
+                            case R.id.allUsers:
+                                filteredList.addAll(userList);
+                                createBarChart(filteredList);
+                        }
+                    }
+                });
                 createBarChart(userList);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
         return view;
     }
 
@@ -113,7 +130,7 @@ public class UserRatingFragment extends Fragment {
         barChart.getDescription().setEnabled(false);
         barChart.setVisibleXRangeMaximum(4);
 
-        barChart.animateXY(1000, 500);
+        barChart.animateXY(500, 500);
         barChart.invalidate();
     }
 }

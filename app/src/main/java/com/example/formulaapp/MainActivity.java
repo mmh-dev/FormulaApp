@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         Menu nav_menu = navigationView.getMenu();
         if (firebaseUser.getEmail().equals("formula.osh.manager@gmail.com")){
-            nav_menu.findItem(R.id.rating).setVisible(false);
             nav_menu.findItem(R.id.send_email_to_manager).setVisible(false);
         }
         else {
@@ -182,6 +181,22 @@ public class MainActivity extends AppCompatActivity {
                                 replace(R.id.fragment_container, new MainMenuFragment()).commit();
                         break;
                     case R.id.rating:
+                        referenceUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                User user = snapshot.getValue(User.class);
+                                RatingFragment ratingFragment = new RatingFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("selectedUser", user);
+                                ratingFragment.setArguments(bundle);
+                                getSupportFragmentManager().beginTransaction()
+                                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                                        .replace(R.id.fragment_container, ratingFragment).commit();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
                         getSupportFragmentManager().beginTransaction().
                                 replace(R.id.fragment_container, new RatingFragment()).commit();
                         break;

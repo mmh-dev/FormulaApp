@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.formulaapp.Models.TestData;
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.MyMarkerView;
 import com.example.formulaapp.R;
@@ -73,6 +74,11 @@ public class RatingFragment extends Fragment {
         leader3_photo = view.findViewById(R.id.leader3_photo);
         cup = view.findViewById(R.id.cup);
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            myUser = (User) bundle.getSerializable("selectedUser");
+        }
+
         userList.clear();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -82,10 +88,6 @@ public class RatingFragment extends Fragment {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
-                    assert user != null;
-                    if (user.getId().equals(firebaseUser.getUid())){
-                        myUser = user;
-                    }
                 }
                 userList.sort(Comparator.comparing(User::getAllPoints).reversed());
                 leader1_name.setText(userList.get(0).getUsername());

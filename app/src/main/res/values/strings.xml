@@ -308,5 +308,8 @@
     <string name="three_leaders">Тройка лидеров:</string>
     <string name="choose_category">"Выберите категорию "</string>
     <string name="show">Показать</string>
+    <string name="all">Все</string>
+    <string name="interns">Стажеры</string>
+    <string name="employees">Сотрудники</string>
 
 </resources>
