@@ -9,26 +9,27 @@ public class User implements Serializable {
     private String username;
     private String imageUrl;
     private String status;
-    private Integer dvigatel;
-    private Integer transmissiya;
-    private Integer podveska;
-    private Integer rul;
-    private Integer ohlazhdeniye;
-    private Integer zajiganiye;
-    private Integer toplivo;
-    private Integer tormoz;
-    private Integer electro;
-    private Integer datchiki;
-    private Integer kuzov;
-    private Integer salon;
-    private Integer masla;
-    private Integer totalPoints;
-    private Integer allPoints;
+    private int dvigatel;
+    private int transmissiya;
+    private int podveska;
+    private int rul;
+    private int ohlazhdeniye;
+    private int zajiganiye;
+    private int toplivo;
+    private int tormoz;
+    private int electro;
+    private int datchiki;
+    private int kuzov;
+    private int salon;
+    private int masla;
+    private int totalPoints;
+    private int allPoints;
+    private int ranking;
 
     public User() {
     }
 
-    public User(String id, String email, String username, String imageUrl, String status, Integer dvigatel, Integer transmissiya, Integer podveska, Integer rul, Integer ohlazhdeniye, Integer zajiganiye, Integer toplivo, Integer tormoz, Integer electro, Integer datchiki, Integer kuzov, Integer salon, Integer masla, Integer totalPoints, Integer allPoints) {
+    public User(String id, String email, String username, String imageUrl, String status, int dvigatel, int transmissiya, int podveska, int rul, int ohlazhdeniye, int zajiganiye, int toplivo, int tormoz, int electro, int datchiki, int kuzov, int salon, int masla, int totalPoints, int allPoints, int ranking) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -49,6 +50,7 @@ public class User implements Serializable {
         this.masla = masla;
         this.totalPoints = totalPoints;
         this.allPoints = allPoints;
+        this.ranking = ranking;
     }
 
     public String getId() {
@@ -91,124 +93,131 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public Integer getDvigatel() {
+    public int getDvigatel() {
         return dvigatel;
     }
 
-    public void setDvigatel(Integer dvigatel) {
+    public void setDvigatel(int dvigatel) {
         this.dvigatel = dvigatel;
     }
 
-    public Integer getTransmissiya() {
+    public int getTransmissiya() {
         return transmissiya;
     }
 
-    public void setTransmissiya(Integer transmissiya) {
+    public void setTransmissiya(int transmissiya) {
         this.transmissiya = transmissiya;
     }
 
-    public Integer getPodveska() {
+    public int getPodveska() {
         return podveska;
     }
 
-    public void setPodveska(Integer podveska) {
+    public void setPodveska(int podveska) {
         this.podveska = podveska;
     }
 
-    public Integer getRul() {
+    public int getRul() {
         return rul;
     }
 
-    public void setRul(Integer rul) {
+    public void setRul(int rul) {
         this.rul = rul;
     }
 
-    public Integer getOhlazhdeniye() {
+    public int getOhlazhdeniye() {
         return ohlazhdeniye;
     }
 
-    public void setOhlazhdeniye(Integer ohlazhdeniye) {
+    public void setOhlazhdeniye(int ohlazhdeniye) {
         this.ohlazhdeniye = ohlazhdeniye;
     }
 
-    public Integer getZajiganiye() {
+    public int getZajiganiye() {
         return zajiganiye;
     }
 
-    public void setZajiganiye(Integer zajiganiye) {
+    public void setZajiganiye(int zajiganiye) {
         this.zajiganiye = zajiganiye;
     }
 
-    public Integer getToplivo() {
+    public int getToplivo() {
         return toplivo;
     }
 
-    public void setToplivo(Integer toplivo) {
+    public void setToplivo(int toplivo) {
         this.toplivo = toplivo;
     }
 
-    public Integer getTormoz() {
+    public int getTormoz() {
         return tormoz;
     }
 
-    public void setTormoz(Integer tormoz) {
+    public void setTormoz(int tormoz) {
         this.tormoz = tormoz;
     }
 
-    public Integer getElectro() {
+    public int getElectro() {
         return electro;
     }
 
-    public void setElectro(Integer electro) {
+    public void setElectro(int electro) {
         this.electro = electro;
     }
 
-    public Integer getDatchiki() {
+    public int getDatchiki() {
         return datchiki;
     }
 
-    public void setDatchiki(Integer datchiki) {
+    public void setDatchiki(int datchiki) {
         this.datchiki = datchiki;
     }
 
-    public Integer getKuzov() {
+    public int getKuzov() {
         return kuzov;
     }
 
-    public void setKuzov(Integer kuzov) {
+    public void setKuzov(int kuzov) {
         this.kuzov = kuzov;
     }
 
-    public Integer getSalon() {
+    public int getSalon() {
         return salon;
     }
 
-    public void setSalon(Integer salon) {
+    public void setSalon(int salon) {
         this.salon = salon;
     }
 
-    public Integer getMasla() {
+    public int getMasla() {
         return masla;
     }
 
-    public void setMasla(Integer masla) {
+    public void setMasla(int masla) {
         this.masla = masla;
     }
 
-    public Integer getTotalPoints() {
+    public int getTotalPoints() {
         return totalPoints;
     }
 
-    public void setTotalPoints(Integer totalPoints) {
+    public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
 
-    public Integer getAllPoints() {
-        Integer points = dvigatel + transmissiya + podveska + rul + ohlazhdeniye + zajiganiye + toplivo + tormoz + electro + datchiki + kuzov + salon + masla + totalPoints;
-        return points;
+    public int getAllPoints() {
+        return dvigatel + transmissiya + podveska + rul + ohlazhdeniye + zajiganiye + toplivo + tormoz + electro + datchiki + kuzov + salon + masla + totalPoints;
     }
 
-    public void setAllPoints(Integer allPoints) {
+    public void setAllPoints(int allPoints) {
         this.allPoints = allPoints;
+    }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
     }
 }

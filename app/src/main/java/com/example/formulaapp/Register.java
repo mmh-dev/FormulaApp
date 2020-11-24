@@ -150,6 +150,8 @@ public class Register extends AppCompatActivity {
                             user.setSalon(0);
                             user.setMasla(0);
                             user.setTotalPoints(0);
+                            user.setAllPoints(0);
+                            user.setRanking(1);
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

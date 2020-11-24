@@ -16,12 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.formulaapp.Models.TestData;
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.MyMarkerView;
 import com.example.formulaapp.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -43,8 +43,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 
 public class RatingFragment extends Fragment {
 
@@ -53,10 +51,11 @@ public class RatingFragment extends Fragment {
     DatabaseReference reference;
     List<User> userList = new ArrayList<>();
     User myUser = new User();
-    TextView leader1_name, leader2_name, leader3_name, your_position;
-    CircleImageView leader1_photo, leader2_photo,leader3_photo;
-    ImageView cup;
-    byte count = 0;
+    TextView leader1_tv, leader2_tv, leader3_tv, your_position;
+    ImageView cup, cup2, cup3;
+    String leaders1 = "";
+    String leaders2 = "";
+    String leaders3 = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,14 +64,13 @@ public class RatingFragment extends Fragment {
         chart = view.findViewById(R.id.chart);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Objects.requireNonNull(getActivity()).setTitle(getString(R.string.rating));
-        leader1_name = view.findViewById(R.id.leader1_name);
-        leader2_name = view.findViewById(R.id.leader2_name);
-        leader3_name = view.findViewById(R.id.leader3_name);
+        leader1_tv = view.findViewById(R.id.leader1_name);
+        leader2_tv = view.findViewById(R.id.leader2_name);
+        leader3_tv = view.findViewById(R.id.leader3_name);
         your_position = view.findViewById(R.id.your_position);
-        leader1_photo = view.findViewById(R.id.leader1_photo);
-        leader2_photo = view.findViewById(R.id.leader2_photo);
-        leader3_photo = view.findViewById(R.id.leader3_photo);
         cup = view.findViewById(R.id.cup);
+        cup2 = view.findViewById(R.id.cup2);
+        cup3 = view.findViewById(R.id.cup3);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -89,34 +87,48 @@ public class RatingFragment extends Fragment {
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
                 }
+
                 userList.sort(Comparator.comparing(User::getAllPoints).reversed());
-                leader1_name.setText(userList.get(0).getUsername());
-                if (!userList.get(0).getImageUrl().equals("default")){
-                    Picasso.get().load(userList.get(0).getImageUrl()).into(leader1_photo);
+                userList.get(0).setRanking(1);
+                for (int i = 1; i <userList.size() ; i++) {
+                    if (userList.get(i).getAllPoints() >= userList.get(i-1).getAllPoints()){
+                        userList.get(i).setRanking(userList.get(i-1).getRanking());
+                    }
+                    else {
+                        userList.get(i).setRanking(userList.get(i-1).getRanking() + 1);
+                    }
                 }
-                leader2_name.setText(userList.get(1).getUsername());
-                if (!userList.get(1).getImageUrl().equals("default")){
-                    Picasso.get().load(userList.get(1).getImageUrl()).into(leader2_photo);
-                }
-                leader3_name.setText(userList.get(2).getUsername());
-                if (!userList.get(2).getImageUrl().equals("default")){
-                    Picasso.get().load(userList.get(2).getImageUrl()).into(leader3_photo);
-                }
+
                 for (User u: userList) {
-                    count++;
+                    if (u.getRanking() == 1){
+                        leaders1 = leaders1 + u.getUsername() + ", ";
+                    }
+                    if (u.getRanking() == 2){
+                        leaders2 = leaders2 + u.getUsername() + ", ";
+                    }
+                    if (u.getRanking() == 3){
+                        leaders3 = leaders3 + u.getUsername() + ", ";
+                    }
+                }
+                leader1_tv.setText(leaders1.substring(0, leaders1.length() - 2));
+                leader2_tv.setText(leaders2.substring(0, leaders2.length() - 2));
+                leader3_tv.setText(leaders3.substring(0, leaders3.length() - 2));
+
+                for (User u: userList) {
                     if (u.getId().equals(myUser.getId())){
-                        your_position.setText(String.valueOf(count));
-                        if (count == 1){
+                        your_position.setText(String.valueOf(u.getRanking()));
+                        if (u.getRanking() == 1){
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_gold, null));
                         }
-                        else if (count == 2){
+                        else if (u.getRanking() == 2){
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_silver, null));
                         }
-                        else if (count == 3){
+                        else if (u.getRanking() == 3){
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_bronze, null));
                         }
                     }
                 };
+
                 createPieChart();
 
             }
@@ -149,7 +161,7 @@ public class RatingFragment extends Fragment {
         Legend l = chart.getLegend();
         l.setEnabled(false);
 
-        MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
+        IMarker mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         chart.setMarker(mv);
 
         PieDataSet dataSet = new PieDataSet(myPointsData(myUser), "");
