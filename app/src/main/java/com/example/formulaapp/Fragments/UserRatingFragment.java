@@ -2,6 +2,10 @@ package com.example.formulaapp.Fragments;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -9,15 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioGroup;
-
 import com.example.formulaapp.Adapters.RatingAdapter;
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.R;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,63 +41,67 @@ public class UserRatingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_rating, container, false);
         radioGroup = view.findViewById(R.id.radioGroup);
         recyclerView = view.findViewById(R.id.userListView);
+        reference = FirebaseDatabase.getInstance().getReference("Users");
         getActivity().setTitle(getString(R.string.users_rating));
 
-        userList.clear();
-        filteredList.addAll(userList);
         adapter = new RatingAdapter(filteredList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        reference = FirebaseDatabase.getInstance().getReference("Users");
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                adapter.notifyDataSetChanged();
+                switch (checkedId) {
+                    case R.id.internsRadioButton:
+                        filteredList.clear();
+                        for (User u : userList) {
+                            if (u.getStatus().equals("Стажер")) {
+                                filteredList.add(u);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                        return;
+                    case R.id.employeesRadioButton:
+                        filteredList.clear();
+                        for (User u : userList) {
+                            if (u.getStatus().equals("Cотрудник")) {
+                                filteredList.add(u);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                        return;
+                    case R.id.allUsersRadioButton:
+                        filteredList.clear();
+                        filteredList.addAll(userList);
+                        adapter.notifyDataSetChanged();
+                }
+            }
+        });
 
         reference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                userList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
                 }
 
                 userList.sort(Comparator.comparing(User::getAllPoints).reversed());
                 userList.get(0).setRanking(1);
-                for (int i = 1; i <userList.size() ; i++) {
-                    if (userList.get(i).getAllPoints() >= userList.get(i-1).getAllPoints()){
-                        userList.get(i).setRanking(userList.get(i-1).getRanking());
+                for (int i = 1; i < userList.size(); i++) {
+                    if (userList.get(i).getAllPoints() >= userList.get(i - 1).getAllPoints()) {
+                        userList.get(i).setRanking(userList.get(i - 1).getRanking());
+                    } else {
+                        userList.get(i).setRanking(userList.get(i - 1).getRanking() + 1);
                     }
-                    else {
-                        userList.get(i).setRanking(userList.get(i-1).getRanking() + 1);
-                    }
-                };
-                adapter.notifyDataSetChanged();
-                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                        switch (checkedId){
-                            case R.id.internsRadioButton:
-                                for (User u: userList) {
-                                    if (u.getStatus().equals("Стажер")){
-                                        filteredList.add(u);
-                                    }
-                                }
-                                adapter.notifyDataSetChanged();
-                                return;
-                            case R.id.employeesRadioButton:
-                                for (User u: userList) {
-                                    if (u.getStatus().equals("Сотрудник")){
-                                        filteredList.add(u);
-                                    }
-                                }
-                                adapter.notifyDataSetChanged();
-                                return;
-                            case R.id.allUsersRadioButton:
-                                filteredList.addAll(userList);
-                                adapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-
+                }
+                filteredList.addAll(userList);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -112,7 +114,7 @@ public class UserRatingFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User selectedUser = new User();
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             User u = dataSnapshot.getValue(User.class);
                             assert u != null;
                             if (u.getEmail().equals(userList.get(position).getEmail())) {
@@ -128,6 +130,7 @@ public class UserRatingFragment extends Fragment {
                                 .replace(R.id.fragment_container, ratingFragment).
                                 addToBackStack("User rating menu").commit();
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }

@@ -1,14 +1,5 @@
 package com.example.formulaapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,9 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.formulaapp.Fragments.AboutAppFragment;
 import com.example.formulaapp.Fragments.EditTestCategoriesFragment;
-import com.example.formulaapp.Fragments.EditTestFragment;
 import com.example.formulaapp.Fragments.MainMenuFragment;
 import com.example.formulaapp.Fragments.ManageUserFragment;
 import com.example.formulaapp.Fragments.RatingFragment;
@@ -43,7 +40,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,10 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
 //            moveTaskToBack(true);
         }
@@ -82,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.home){
+        if (item.getItemId() == R.id.home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MainMenuFragment()).commit();
         }
-        if (item.getItemId() == R.id.search){
+        if (item.getItemId() == R.id.search) {
             Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
@@ -101,10 +96,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         Menu nav_menu = navigationView.getMenu();
-        if (firebaseUser.getEmail().equals("formula.osh.manager@gmail.com")){
+        if (firebaseUser.getEmail().equals("formula.osh.manager@gmail.com")) {
             nav_menu.findItem(R.id.send_email_to_manager).setVisible(false);
-        }
-        else {
+        } else {
             nav_menu.findItem(R.id.users_rating).setVisible(false);
             nav_menu.findItem(R.id.edit_test).setVisible(false);
             nav_menu.findItem(R.id.manage_users).setVisible(false);
@@ -116,13 +110,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MainMenuFragment()).commit();
         }
@@ -139,10 +132,9 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null) {
                     username.setText(user.getUsername());
                     user_email.setText(user.getEmail());
-                    if (user.getImageUrl().equals("default")){
+                    if (user.getImageUrl().equals("default")) {
                         user_photo.setImageResource(R.drawable.person_icon);
-                    }
-                    else {
+                    } else {
                         Picasso.get().load(user.getImageUrl()).into(user_photo);
                     }
                 }
@@ -157,11 +149,12 @@ public class MainActivity extends AppCompatActivity {
         listener = referenceQuestion.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question q = dataSnapshot.getValue(Question.class);
                     questionList.add(q);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -171,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.spravochnik:
                         getSupportFragmentManager().beginTransaction().
                                 replace(R.id.fragment_container, new SpravochnikFragment()).commit();
@@ -193,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
                                         .replace(R.id.fragment_container, ratingFragment).commit();
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
@@ -209,10 +203,9 @@ public class MainActivity extends AppCompatActivity {
                                 replace(R.id.fragment_container, new SavedPagesFragment()).commit();
                         break;
                     case R.id.final_test:
-                        if (questionList.size() >= 50){
+                        if (questionList.size() >= 50) {
                             totalQuestionsNumber = 50;
-                        }
-                        else {
+                        } else {
                             totalQuestionsNumber = questionList.size();
                         }
                         TestFragment testFragment = new TestFragment();

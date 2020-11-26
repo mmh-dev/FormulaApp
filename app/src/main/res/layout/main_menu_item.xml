@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:text="Header"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
             android:layout_marginBottom="10dp"
             android:text="Description"
             android:textColor="@android:color/black"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/header" />
 

@@ -1,16 +1,14 @@
 package com.example.formulaapp.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.formulaapp.Adapters.MainMenuAdapter;
 import com.example.formulaapp.Models.MenuBullet;
@@ -49,7 +47,7 @@ public class EditTestCategoriesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int[] count = new int[13];
                 menuBulletList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question question = dataSnapshot.getValue(Question.class);
                     switch (Objects.requireNonNull(question).getCategory()) {
                         case "Двигатель":
@@ -123,12 +121,14 @@ public class EditTestCategoriesFragment extends Fragment {
                                 .replace(R.id.fragment_container, editTestFragment).
                                 addToBackStack("EditTestMainMenu").commit();
                     }
+
                     @Override
                     public void onDeleteClick(int position) {
 
                     }
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

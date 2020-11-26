@@ -15,7 +15,7 @@ public class Question implements Serializable {
     public Question() {
     }
 
-    public Question( String category, String questionText, String answer1, String answer2, String answer3, String answer4, String correctAnswer) {
+    public Question(String category, String questionText, String answer1, String answer2, String answer3, String answer4, String correctAnswer) {
         this.category = category;
         this.questionText = questionText;
         this.answer1 = answer1;

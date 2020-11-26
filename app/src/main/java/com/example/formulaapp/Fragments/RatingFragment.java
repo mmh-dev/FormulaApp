@@ -4,17 +4,16 @@ package com.example.formulaapp.Fragments;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.MyMarkerView;
@@ -26,7 +25,6 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +34,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -83,30 +80,29 @@ public class RatingFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
                     userList.add(user);
                 }
 
                 userList.sort(Comparator.comparing(User::getAllPoints).reversed());
                 userList.get(0).setRanking(1);
-                for (int i = 1; i <userList.size() ; i++) {
-                    if (userList.get(i).getAllPoints() >= userList.get(i-1).getAllPoints()){
-                        userList.get(i).setRanking(userList.get(i-1).getRanking());
-                    }
-                    else {
-                        userList.get(i).setRanking(userList.get(i-1).getRanking() + 1);
+                for (int i = 1; i < userList.size(); i++) {
+                    if (userList.get(i).getAllPoints() >= userList.get(i - 1).getAllPoints()) {
+                        userList.get(i).setRanking(userList.get(i - 1).getRanking());
+                    } else {
+                        userList.get(i).setRanking(userList.get(i - 1).getRanking() + 1);
                     }
                 }
 
-                for (User u: userList) {
-                    if (u.getRanking() == 1){
+                for (User u : userList) {
+                    if (u.getRanking() == 1) {
                         leaders1 = leaders1 + u.getUsername() + ", ";
                     }
-                    if (u.getRanking() == 2){
+                    if (u.getRanking() == 2) {
                         leaders2 = leaders2 + u.getUsername() + ", ";
                     }
-                    if (u.getRanking() == 3){
+                    if (u.getRanking() == 3) {
                         leaders3 = leaders3 + u.getUsername() + ", ";
                     }
                 }
@@ -114,24 +110,23 @@ public class RatingFragment extends Fragment {
                 leader2_tv.setText(leaders2.substring(0, leaders2.length() - 2));
                 leader3_tv.setText(leaders3.substring(0, leaders3.length() - 2));
 
-                for (User u: userList) {
-                    if (u.getId().equals(myUser.getId())){
+                for (User u : userList) {
+                    if (u.getId().equals(myUser.getId())) {
                         your_position.setText(String.valueOf(u.getRanking()));
-                        if (u.getRanking() == 1){
+                        if (u.getRanking() == 1) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_gold, null));
-                        }
-                        else if (u.getRanking() == 2){
+                        } else if (u.getRanking() == 2) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_silver, null));
-                        }
-                        else if (u.getRanking() == 3){
+                        } else if (u.getRanking() == 3) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_bronze, null));
                         }
                     }
-                };
+                }
 
                 createPieChart();
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -151,7 +146,7 @@ public class RatingFragment extends Fragment {
         ValueFormatter formatter = new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return String.valueOf((int)value);
+                return String.valueOf((int) value);
             }
         };
 
@@ -183,48 +178,48 @@ public class RatingFragment extends Fragment {
     private List<PieEntry> myPointsData(User u) {
         String[] manCats = getResources().getStringArray(R.array.main_categories);
         List<PieEntry> yVal = new ArrayList<>();
-        if (u.getDvigatel() != 0){
+        if (u.getDvigatel() != 0) {
             yVal.add(new PieEntry((float) u.getDvigatel(), manCats[0]));
         }
-        if (u.getTransmissiya() != 0){
+        if (u.getTransmissiya() != 0) {
             yVal.add(new PieEntry((float) u.getTransmissiya(), manCats[1]));
         }
-        if (u.getPodveska() != 0){
+        if (u.getPodveska() != 0) {
             yVal.add(new PieEntry((float) u.getPodveska(), manCats[2]));
         }
-        if (u.getRul() != 0){
+        if (u.getRul() != 0) {
             yVal.add(new PieEntry((float) u.getRul(), manCats[3]));
         }
-        if (u.getOhlazhdeniye() != 0){
+        if (u.getOhlazhdeniye() != 0) {
             yVal.add(new PieEntry((float) u.getOhlazhdeniye(), manCats[4]));
         }
-        if (u.getZajiganiye() != 0){
+        if (u.getZajiganiye() != 0) {
             yVal.add(new PieEntry((float) u.getZajiganiye(), manCats[5]));
         }
-        if (u.getToplivo() != 0){
+        if (u.getToplivo() != 0) {
             yVal.add(new PieEntry((float) u.getToplivo(), manCats[6]));
         }
-        if (u.getTormoz() != 0){
+        if (u.getTormoz() != 0) {
             yVal.add(new PieEntry((float) u.getTormoz(), manCats[7]));
         }
-        if (u.getElectro() != 0){
+        if (u.getElectro() != 0) {
             yVal.add(new PieEntry((float) u.getElectro(), manCats[8]));
         }
-        if (u.getDatchiki() != 0){
+        if (u.getDatchiki() != 0) {
             yVal.add(new PieEntry((float) u.getDatchiki(), manCats[9]));
         }
-        if (u.getKuzov() != 0){
+        if (u.getKuzov() != 0) {
             yVal.add(new PieEntry((float) u.getKuzov(), manCats[10]));
         }
-        if (u.getSalon() != 0){
+        if (u.getSalon() != 0) {
             yVal.add(new PieEntry((float) u.getSalon(), manCats[11]));
         }
-        if (u.getMasla() != 0){
+        if (u.getMasla() != 0) {
             yVal.add(new PieEntry((float) u.getMasla(), manCats[12]));
         }
-        if (u.getTotalPoints() != 0){
+        if (u.getTotalPoints() != 0) {
             yVal.add(new PieEntry((float) u.getTotalPoints(), getString(R.string.final_test)));
         }
-        return  yVal;
+        return yVal;
     }
 }

@@ -1,10 +1,9 @@
 package com.example.formulaapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -12,7 +11,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startActivity(new Intent(SplashScreen.this, Login.class ));
+        startActivity(new Intent(SplashScreen.this, Login.class));
         finish();
     }
 }

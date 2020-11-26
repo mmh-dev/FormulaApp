@@ -1,11 +1,6 @@
 package com.example.formulaapp.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.formulaapp.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.formulaapp.Models.Question;
 import com.example.formulaapp.Models.TestData;
 import com.example.formulaapp.Models.User;
 import com.example.formulaapp.R;
-import com.example.formulaapp.Register;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,18 +24,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TestFragment extends Fragment {
     CircularProgressView progressBar;
-    TextView questions_passed, questions_total, points,question_text;
+    TextView questions_passed, questions_total, points, question_text;
     TextView variant1, variant2, variant3, variant4;
     Button next, submit;
     String header;
@@ -84,16 +78,16 @@ public class TestFragment extends Fragment {
         getActivity().setTitle(header);
 
         questions_passed.setText(String.valueOf(count));
-        questions_total.setText(String.valueOf((int)totalQuestionsNumber));
-        points.setText(String.valueOf((int)totalPoints));
-        progressBar.setProgress(((int)(totalPoints/totalQuestionsNumber*100)), true);
+        questions_total.setText(String.valueOf((int) totalQuestionsNumber));
+        points.setText(String.valueOf((int) totalPoints));
+        progressBar.setProgress(((int) (totalPoints / totalQuestionsNumber * 100)), true);
         question_text.setText(questionList.get(0).getQuestionText());
         variant1.setText(questionList.get(0).getAnswer1());
         variant2.setText(questionList.get(0).getAnswer2());
         variant3.setText(questionList.get(0).getAnswer3());
         variant4.setText(questionList.get(0).getAnswer4());
 
-        if (count >= totalQuestionsNumber){
+        if (count >= totalQuestionsNumber) {
             next.setVisibility(View.GONE);
             submit.setVisibility(View.VISIBLE);
         }
@@ -148,8 +142,8 @@ public class TestFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (chosenAnswer.equals(questionList.get(0).getCorrectAnswer())){
-                    switch (selectedVariant){
+                if (chosenAnswer.equals(questionList.get(0).getCorrectAnswer())) {
+                    switch (selectedVariant) {
                         case 1:
                             variant1.setBackgroundResource(R.drawable.btn_green_variant);
                             totalPoints++;
@@ -167,58 +161,56 @@ public class TestFragment extends Fragment {
                             totalPoints++;
                             break;
                     }
-                    if (isFinal){
-                        user.setTotalPoints((int)totalPoints);
-                    }
-                    else {
-                        switch (questionList.get(0).getCategory()){
+                    if (isFinal) {
+                        user.setTotalPoints((int) totalPoints);
+                    } else {
+                        switch (questionList.get(0).getCategory()) {
                             case "Двигатель":
-                                user.setDvigatel((int)totalPoints);
+                                user.setDvigatel((int) totalPoints);
                                 break;
                             case "Трансмиссия":
-                                user.setTransmissiya((int)totalPoints);
+                                user.setTransmissiya((int) totalPoints);
                                 break;
                             case "Подвеска":
-                                user.setPodveska((int)totalPoints);
+                                user.setPodveska((int) totalPoints);
                                 break;
                             case "Рулевое управление":
-                                user.setRul((int)totalPoints);
+                                user.setRul((int) totalPoints);
                                 break;
                             case "Система охлаждения":
-                                user.setOhlazhdeniye((int)totalPoints);
+                                user.setOhlazhdeniye((int) totalPoints);
                                 break;
                             case "Система зажигания":
-                                user.setZajiganiye((int)totalPoints);
+                                user.setZajiganiye((int) totalPoints);
                                 break;
                             case "Топливная система":
-                                user.setToplivo((int)totalPoints);
+                                user.setToplivo((int) totalPoints);
                                 break;
                             case "Тормозная система":
-                                user.setTormoz((int)totalPoints);
+                                user.setTormoz((int) totalPoints);
                                 break;
                             case "Электрооборудование":
-                                user.setElectro((int)totalPoints);
+                                user.setElectro((int) totalPoints);
                                 break;
                             case "Датчики":
-                                user.setDatchiki((int)totalPoints);
+                                user.setDatchiki((int) totalPoints);
                                 break;
                             case "Кузов":
-                                user.setKuzov((int)totalPoints);
+                                user.setKuzov((int) totalPoints);
                                 break;
                             case "Салон":
-                                user.setSalon((int)totalPoints);
+                                user.setSalon((int) totalPoints);
                                 break;
                             case "Масла":
-                                user.setMasla((int)totalPoints);
+                                user.setMasla((int) totalPoints);
                                 break;
                         }
                     }
-                    progressBar.setProgress(((int)(totalPoints/totalQuestionsNumber*100)), true);
-                    points.setText(String.valueOf((int)totalPoints));
+                    progressBar.setProgress(((int) (totalPoints / totalQuestionsNumber * 100)), true);
+                    points.setText(String.valueOf((int) totalPoints));
                     Toast.makeText(getActivity(), (getString(R.string.correct_answer) + "!"), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    switch (selectedVariant){
+                } else {
+                    switch (selectedVariant) {
                         case 1:
                             variant1.setBackgroundResource(R.drawable.btn_red_variant);
                             break;
@@ -232,16 +224,13 @@ public class TestFragment extends Fragment {
                             variant4.setBackgroundResource(R.drawable.btn_red_variant);
                             break;
                     }
-                    if (variant1.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    if (variant1.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant1.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else if (variant2.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    } else if (variant2.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant2.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else if (variant3.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    } else if (variant3.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant3.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else {
+                    } else {
                         variant4.setBackgroundResource(R.drawable.btn_green_variant);
                     }
                     Toast.makeText(getActivity(), (getString(R.string.corrent_answer) + questionList.get(0).getCorrectAnswer() + "!"), Toast.LENGTH_LONG).show();
@@ -266,8 +255,8 @@ public class TestFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (chosenAnswer.equals(questionList.get(0).getCorrectAnswer())){
-                    switch (selectedVariant){
+                if (chosenAnswer.equals(questionList.get(0).getCorrectAnswer())) {
+                    switch (selectedVariant) {
                         case 1:
                             variant1.setBackgroundResource(R.drawable.btn_green_variant);
                             totalPoints++;
@@ -285,58 +274,56 @@ public class TestFragment extends Fragment {
                             totalPoints++;
                             break;
                     }
-                    if (isFinal){
-                        user.setTotalPoints((int)totalPoints);
-                    }
-                    else {
-                        switch (questionList.get(0).getCategory()){
+                    if (isFinal) {
+                        user.setTotalPoints((int) totalPoints);
+                    } else {
+                        switch (questionList.get(0).getCategory()) {
                             case "Двигатель":
-                                user.setDvigatel((int)totalPoints);
+                                user.setDvigatel((int) totalPoints);
                                 break;
                             case "Трансмиссия":
-                                user.setTransmissiya((int)totalPoints);
+                                user.setTransmissiya((int) totalPoints);
                                 break;
                             case "Подвеска":
-                                user.setPodveska((int)totalPoints);
+                                user.setPodveska((int) totalPoints);
                                 break;
                             case "Рулевое управление":
-                                user.setRul((int)totalPoints);
+                                user.setRul((int) totalPoints);
                                 break;
                             case "Система охлаждения":
-                                user.setOhlazhdeniye((int)totalPoints);
+                                user.setOhlazhdeniye((int) totalPoints);
                                 break;
                             case "Система зажигания":
-                                user.setZajiganiye((int)totalPoints);
+                                user.setZajiganiye((int) totalPoints);
                                 break;
                             case "Топливная система":
-                                user.setToplivo((int)totalPoints);
+                                user.setToplivo((int) totalPoints);
                                 break;
                             case "Тормозная система":
-                                user.setTormoz((int)totalPoints);
+                                user.setTormoz((int) totalPoints);
                                 break;
                             case "Электрооборудование":
-                                user.setElectro((int)totalPoints);
+                                user.setElectro((int) totalPoints);
                                 break;
                             case "Датчики":
-                                user.setDatchiki((int)totalPoints);
+                                user.setDatchiki((int) totalPoints);
                                 break;
                             case "Кузов":
-                                user.setKuzov((int)totalPoints);
+                                user.setKuzov((int) totalPoints);
                                 break;
                             case "Салон":
-                                user.setSalon((int)totalPoints);
+                                user.setSalon((int) totalPoints);
                                 break;
                             case "Масла":
-                                user.setMasla((int)totalPoints);
+                                user.setMasla((int) totalPoints);
                                 break;
                         }
                     }
-                    progressBar.setProgress(((int)(totalPoints/totalQuestionsNumber*100)), true);
-                    points.setText(String.valueOf((int)totalPoints));
+                    progressBar.setProgress(((int) (totalPoints / totalQuestionsNumber * 100)), true);
+                    points.setText(String.valueOf((int) totalPoints));
                     Toast.makeText(getActivity(), (getString(R.string.correct_answer) + "!"), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    switch (selectedVariant){
+                } else {
+                    switch (selectedVariant) {
                         case 1:
                             variant1.setBackgroundResource(R.drawable.btn_red_variant);
                             break;
@@ -350,16 +337,13 @@ public class TestFragment extends Fragment {
                             variant4.setBackgroundResource(R.drawable.btn_red_variant);
                             break;
                     }
-                    if (variant1.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    if (variant1.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant1.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else if (variant2.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    } else if (variant2.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant2.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else if (variant3.getText().toString().equals(questionList.get(0).getCorrectAnswer())){
+                    } else if (variant3.getText().toString().equals(questionList.get(0).getCorrectAnswer())) {
                         variant3.setBackgroundResource(R.drawable.btn_green_variant);
-                    }
-                    else {
+                    } else {
                         variant4.setBackgroundResource(R.drawable.btn_green_variant);
                     }
                     Toast.makeText(getActivity(), (getString(R.string.corrent_answer) + questionList.get(0).getCorrectAnswer() + "!"), Toast.LENGTH_LONG).show();
@@ -374,7 +358,7 @@ public class TestFragment extends Fragment {
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(getActivity(), getString(R.string.data_saved_on_server), Toast.LENGTH_SHORT).show();
                                         new Timer().schedule(new TimerTask() {
                                             @Override

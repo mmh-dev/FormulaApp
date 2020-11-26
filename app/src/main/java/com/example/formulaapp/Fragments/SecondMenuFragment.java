@@ -1,18 +1,15 @@
 package com.example.formulaapp.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.formulaapp.Adapters.PagesAdapter;
 import com.example.formulaapp.Models.Question;
@@ -26,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,6 +68,7 @@ public class SecondMenuFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -80,13 +77,14 @@ public class SecondMenuFragment extends Fragment {
         listener = referenceQuestion.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question q = dataSnapshot.getValue(Question.class);
-                    if (q.getCategory().equals(header)){
+                    if (q.getCategory().equals(header)) {
                         questionList.add(q);
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -97,10 +95,9 @@ public class SecondMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 TestFragment testFragment = new TestFragment();
-                if (questionList.size() >= 20){
+                if (questionList.size() >= 20) {
                     totalQuestionsNumber = 20;
-                }
-                else {
+                } else {
                     totalQuestionsNumber = questionList.size();
                 }
                 TestData testData = new TestData(header, false, 0, totalQuestionsNumber, questionList, user, 0);
@@ -136,7 +133,7 @@ public class SecondMenuFragment extends Fragment {
     }
 
     private void fillList(String header) {
-        switch (header){
+        switch (header) {
             case "Двигатель":
                 Collections.addAll(pagesList, getResources().getStringArray(R.array.engine));
                 break;

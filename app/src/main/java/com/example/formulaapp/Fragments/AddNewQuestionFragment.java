@@ -1,10 +1,6 @@
 package com.example.formulaapp.Fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +10,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.formulaapp.Models.Question;
 import com.example.formulaapp.R;
@@ -26,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 
 public class AddNewQuestionFragment extends Fragment {
@@ -55,8 +53,7 @@ public class AddNewQuestionFragment extends Fragment {
                 question = bundle2.getString("question");
                 ifUpdateCheck = 1;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             header = bundle.getString("header");
         }
 
@@ -76,7 +73,7 @@ public class AddNewQuestionFragment extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question q = dataSnapshot.getValue(Question.class);
                     assert q != null;
                     if (q.getCategory().equals(header) && q.getQuestionText().equals(question)) {
@@ -87,16 +84,13 @@ public class AddNewQuestionFragment extends Fragment {
                         answer2.setText(question.getAnswer2());
                         answer3.setText(question.getAnswer3());
                         answer4.setText(question.getAnswer4());
-                        if (question.getCorrectAnswer().equals(question.getAnswer1())){
+                        if (question.getCorrectAnswer().equals(question.getAnswer1())) {
                             checkBox1.setChecked(true);
-                        }
-                        else if (question.getCorrectAnswer().equals(question.getAnswer2())){
+                        } else if (question.getCorrectAnswer().equals(question.getAnswer2())) {
                             checkBox2.setChecked(true);
-                        }
-                        else if (question.getCorrectAnswer().equals(question.getAnswer3())){
+                        } else if (question.getCorrectAnswer().equals(question.getAnswer3())) {
                             checkBox3.setChecked(true);
-                        }
-                        else {
+                        } else {
                             checkBox4.setChecked(true);
                         }
                     }
@@ -112,7 +106,7 @@ public class AddNewQuestionFragment extends Fragment {
         checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox1.isChecked()){
+                if (checkBox1.isChecked()) {
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
@@ -123,7 +117,7 @@ public class AddNewQuestionFragment extends Fragment {
         checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox2.isChecked()){
+                if (checkBox2.isChecked()) {
                     checkBox1.setChecked(false);
                     checkBox3.setChecked(false);
                     checkBox4.setChecked(false);
@@ -134,7 +128,7 @@ public class AddNewQuestionFragment extends Fragment {
         checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox3.isChecked()){
+                if (checkBox3.isChecked()) {
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox4.setChecked(false);
@@ -145,7 +139,7 @@ public class AddNewQuestionFragment extends Fragment {
         checkBox4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox4.isChecked()){
+                if (checkBox4.isChecked()) {
                     checkBox1.setChecked(false);
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
@@ -163,12 +157,11 @@ public class AddNewQuestionFragment extends Fragment {
                 String answer3_txt = answer3.getText().toString();
                 String answer4_txt = answer4.getText().toString();
                 if (TextUtils.isEmpty(questionBody_txt) || TextUtils.isEmpty(answer1_txt)
-                        || TextUtils.isEmpty(answer2_txt)|| TextUtils.isEmpty(answer3_txt)
-                        || TextUtils.isEmpty(answer4_txt)){
+                        || TextUtils.isEmpty(answer2_txt) || TextUtils.isEmpty(answer3_txt)
+                        || TextUtils.isEmpty(answer4_txt)) {
                     Toast.makeText(getContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if (checkBox1.isChecked() || checkBox2.isChecked() || checkBox3.isChecked() || checkBox4.isChecked()){
+                } else {
+                    if (checkBox1.isChecked() || checkBox2.isChecked() || checkBox3.isChecked() || checkBox4.isChecked()) {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("category", header);
                         map.put("questionText", questionBody_txt);
@@ -177,11 +170,11 @@ public class AddNewQuestionFragment extends Fragment {
                         map.put("answer3", answer3_txt);
                         map.put("answer4", answer4_txt);
                         map.put("correctAnswer", answer);
-                        if (ifUpdateCheck == 1){
+                        if (ifUpdateCheck == 1) {
                             reference.child(question_id).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), getString(R.string.question_is_saved), Toast.LENGTH_SHORT).show();
                                         getFragmentManager().beginTransaction()
                                                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_left)
@@ -190,11 +183,11 @@ public class AddNewQuestionFragment extends Fragment {
 
                                 }
                             });
-                        }else {
+                        } else {
                             reference.push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), getString(R.string.question_is_saved), Toast.LENGTH_SHORT).show();
                                         getFragmentManager().beginTransaction()
                                                 .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_left)
@@ -204,8 +197,7 @@ public class AddNewQuestionFragment extends Fragment {
                                 }
                             });
                         }
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getContext(), getString(R.string.choose_correct_answer), Toast.LENGTH_SHORT).show();
                     }
                 }

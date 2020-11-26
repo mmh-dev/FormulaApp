@@ -10,24 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.formulaapp.Models.MenuBullet;
 import com.example.formulaapp.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.Holder> {
 
-    List<String> pagesList;
     private final int fragment;
     private final Context context;
+    List<String> pagesList;
     RecycleOnClickListener listener;
-
-    public void setOnItemClickListener (RecycleOnClickListener listener){
-        this.listener = listener;
-    }
 
     public PagesAdapter(List<String> pagesList, int fragment, Context context) {
         this.pagesList = pagesList;
@@ -35,14 +27,19 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.Holder> {
         this.context = context;
     }
 
-    /** fragment = 1 -> manager, EditPages
-     fragment = 2 -> user, SecondMenu
+    public void setOnItemClickListener(RecycleOnClickListener listener) {
+        this.listener = listener;
+    }
+
+    /**
+     * fragment = 1 -> manager, EditPages
+     * fragment = 2 -> user, SecondMenu
      */
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = null;
-        switch (fragment){
+        switch (fragment) {
             case 1:
                 view = LayoutInflater.from(context).inflate(R.layout.edit_pages_item, parent, false);
                 break;
@@ -63,16 +60,22 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.Holder> {
         return pagesList.size();
     }
 
+    public interface RecycleOnClickListener {
+        void onItemClick(int position);
+
+        void onDeleteClick(int position);
+    }
+
     public class Holder extends RecyclerView.ViewHolder {
         TextView header1;
         ImageView delete_page;
 
-        public Holder(@NonNull View itemView, RecycleOnClickListener listener ) {
+        public Holder(@NonNull View itemView, RecycleOnClickListener listener) {
             super(itemView);
             header1 = itemView.findViewById(R.id.header1);
             delete_page = itemView.findViewById(R.id.delete_page);
 
-            if (fragment == 1){
+            if (fragment == 1) {
                 delete_page.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -80,7 +83,6 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.Holder> {
                     }
                 });
             }
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,10 +93,5 @@ public class PagesAdapter extends RecyclerView.Adapter<PagesAdapter.Holder> {
                 }
             });
         }
-    }
-
-    public interface RecycleOnClickListener{
-        void onItemClick (int position);
-        void onDeleteClick (int position);
     }
 }

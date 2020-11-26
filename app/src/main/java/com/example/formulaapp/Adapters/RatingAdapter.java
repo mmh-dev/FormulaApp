@@ -1,7 +1,6 @@
 package com.example.formulaapp.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +25,13 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Holder> {
     Context context;
     RecycleOnClickListener listener;
 
-    public void setOnItemClickListener (RecycleOnClickListener listener){
-        this.listener = listener;
-    }
-
     public RatingAdapter(List<User> userList, Context context) {
         this.userList = userList;
         this.context = context;
+    }
+
+    public void setOnItemClickListener(RecycleOnClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -47,29 +46,25 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Holder> {
         holder.ranking.setText(String.valueOf(userList.get(position).getRanking()));
         holder.userNameRating.setText(userList.get(position).getUsername());
         holder.userStatusRating.setText(userList.get(position).getStatus());
-        if (userList.get(position).getImageUrl().equals("default")){
+        if (userList.get(position).getImageUrl().equals("default")) {
             holder.userPhotoRating.setImageResource(R.drawable.person_icon);
-        }
-        else {
+        } else {
             Picasso.get().load(userList.get(position).getImageUrl()).into(holder.userPhotoRating);
         }
         holder.pointsRating.setText(String.valueOf(userList.get(position).getAllPoints()));
-        if (userList.get(position).getRanking() == 1){
+        if (userList.get(position).getRanking() == 1) {
             holder.cupRating.setImageResource(R.drawable.ic_cup_gold);
             holder.cupRating.setVisibility(View.VISIBLE);
             holder.ranking.setTextColor(context.getResources().getColor(R.color.colorYellow));
-        }
-        else if (userList.get(position).getRanking() == 2){
+        } else if (userList.get(position).getRanking() == 2) {
             holder.cupRating.setImageResource(R.drawable.ic_cup_silver);
             holder.cupRating.setVisibility(View.VISIBLE);
             holder.ranking.setTextColor(context.getResources().getColor(R.color.colorYellow));
-        }
-        else if (userList.get(position).getRanking() == 3){
+        } else if (userList.get(position).getRanking() == 3) {
             holder.cupRating.setImageResource(R.drawable.ic_cup_bronze);
             holder.cupRating.setVisibility(View.VISIBLE);
             holder.ranking.setTextColor(context.getResources().getColor(R.color.colorYellow));
-        }
-        else{
+        } else {
             holder.cupRating.setVisibility(View.GONE);
         }
     }
@@ -79,11 +74,16 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Holder> {
         return userList.size();
     }
 
+    public interface RecycleOnClickListener {
+        void onItemClick(int position);
+    }
+
     public class Holder extends RecyclerView.ViewHolder {
 
         TextView ranking, userNameRating, userStatusRating, pointsRating;
         CircleImageView userPhotoRating;
         ImageView cupRating;
+
         public Holder(@NonNull View itemView, RecycleOnClickListener listener) {
             super(itemView);
 
@@ -102,9 +102,5 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Holder> {
                 }
             });
         }
-    }
-
-    public interface RecycleOnClickListener{
-        void onItemClick (int position);
     }
 }

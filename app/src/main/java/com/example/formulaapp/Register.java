@@ -1,8 +1,5 @@
 package com.example.formulaapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.formulaapp.Models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,8 +27,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
@@ -84,17 +82,14 @@ public class Register extends AppCompatActivity {
                 String txt_email = user_email.getText().toString();
                 String txt_password = user_password.getText().toString();
 
-                if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
+                if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
                     Toast.makeText(Register.this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show();
-                }
-                else if (txt_password.length() < 6){
+                } else if (txt_password.length() < 6) {
                     Toast.makeText(Register.this, "Пароль должен содержать не менее 6 символов!", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    if (!user.getStatus().equals("")){
+                } else {
+                    if (!user.getStatus().equals("")) {
                         register(txt_username, txt_email, txt_password);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(Register.this, "Укажите Ваш статус!", Toast.LENGTH_LONG).show();
                     }
 
@@ -106,10 +101,9 @@ public class Register extends AppCompatActivity {
         signUp_google_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!user.getStatus().equals("")){
+                if (!user.getStatus().equals("")) {
                     signUpGoogle();
-                }
-                else {
+                } else {
                     Toast.makeText(Register.this, "Укажите Ваш статус!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -128,7 +122,7 @@ public class Register extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
                             reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
@@ -155,7 +149,7 @@ public class Register extends AppCompatActivity {
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(Register.this, "Пользователь успешно зарегистрирован!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(Register.this, MainActivity.class));
                                     }
@@ -179,6 +173,7 @@ public class Register extends AppCompatActivity {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -187,7 +182,7 @@ public class Register extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle (account);
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -200,7 +195,7 @@ public class Register extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
                             reference = FirebaseDatabase.getInstance().getReference("Users")
@@ -226,14 +221,13 @@ public class Register extends AppCompatActivity {
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(Register.this, getString(R.string.registration_finished), Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(Register.this, MainActivity.class));
                                     }
                                 }
                             });
-                        }
-                        else {
+                        } else {
                             Toast.makeText(Register.this, getString(R.string.registration_error), Toast.LENGTH_SHORT).show();
                         }
                     }

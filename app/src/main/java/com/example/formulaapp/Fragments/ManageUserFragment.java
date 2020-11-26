@@ -3,16 +3,15 @@ package com.example.formulaapp.Fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.formulaapp.Adapters.MainMenuAdapter;
 import com.example.formulaapp.Models.MenuBullet;
@@ -53,14 +52,15 @@ public class ManageUserFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User u = dataSnapshot.getValue(User.class);
-                    if (!u.getId().equals(firebaseUser.getUid())){
+                    if (!u.getId().equals(firebaseUser.getUid())) {
                         userList.add(new MenuBullet(u.getUsername(), u.getStatus(), 0, u.getImageUrl(), 0, u.getEmail()));
                     }
                 }
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -73,7 +73,7 @@ public class ManageUserFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User selectedUser = new User();
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             User u = dataSnapshot.getValue(User.class);
                             assert u != null;
                             if (u.getEmail().equals(userList.get(position).getUser_email())) {
@@ -89,6 +89,7 @@ public class ManageUserFragment extends Fragment {
                                 .replace(R.id.fragment_container, ratingFragment).
                                 addToBackStack("ManageUsers").commit();
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
@@ -100,13 +101,13 @@ public class ManageUserFragment extends Fragment {
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle(R.string.delete_user_dialog_title);
                 dialog.setMessage(R.string.delete_user_dialog_message).setCancelable(false);
-                dialog.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener(){
+                dialog.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         reference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                     User u = dataSnapshot.getValue(User.class);
                                     assert u != null;
                                     if (u.getEmail().equals(userList.get(position).getUser_email())) {
@@ -117,6 +118,7 @@ public class ManageUserFragment extends Fragment {
                                     }
                                 }
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                             }

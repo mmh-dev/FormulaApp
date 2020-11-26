@@ -1,8 +1,5 @@
 package com.example.formulaapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null){
+        if (firebaseUser != null) {
             startActivity(new Intent(Login.this, MainActivity.class));
 
         }
@@ -64,16 +64,14 @@ public class Login extends AppCompatActivity {
                 String txt_email = user_email.getText().toString();
                 String txt_password = user_password.getText().toString();
 
-                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
+                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
                     Toast.makeText(Login.this, "Заполните все поля!", Toast.LENGTH_SHORT).show();
-                }
-
-                else {
+                } else {
                     auth.signInWithEmailAndPassword(txt_email, txt_password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(Login.this, "Регистрация прошла успешно!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(Login.this, MainActivity.class));
                                     }
@@ -115,6 +113,7 @@ public class Login extends AppCompatActivity {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,7 +122,7 @@ public class Login extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle (account);
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -136,13 +135,12 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             firebaseUser = auth.getCurrentUser();
                             Toast.makeText(Login.this, "Вход успешно выполнен!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Login.this, MainActivity.class));
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(Login.this, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
                         }
                     }
