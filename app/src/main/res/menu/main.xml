@@ -6,7 +6,8 @@
         android:id="@+id/search"
         android:icon="@drawable/ic_search_black"
         android:title="search"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <item
         android:id="@+id/home"

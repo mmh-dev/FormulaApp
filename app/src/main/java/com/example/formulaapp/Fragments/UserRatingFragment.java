@@ -41,13 +41,10 @@ public class UserRatingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_rating, container, false);
         radioGroup = view.findViewById(R.id.radioGroup);
         recyclerView = view.findViewById(R.id.userListView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         reference = FirebaseDatabase.getInstance().getReference("Users");
         getActivity().setTitle(getString(R.string.users_rating));
-
         adapter = new RatingAdapter(filteredList, getContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -99,7 +96,10 @@ public class UserRatingFragment extends Fragment {
                         userList.get(i).setRanking(userList.get(i - 1).getRanking() + 1);
                     }
                 }
+                filteredList.clear();
                 filteredList.addAll(userList);
+
+                recyclerView.setAdapter(adapter);
             }
 
             @Override

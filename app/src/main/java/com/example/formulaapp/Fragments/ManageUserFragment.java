@@ -4,11 +4,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,9 +40,11 @@ public class ManageUserFragment extends Fragment {
     DatabaseReference reference;
     FirebaseUser firebaseUser;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_manage_user, container, false);
         getActivity().setTitle(getString(R.string.manage_users));
         recyclerView = view.findViewById(R.id.manage_users_menu);
@@ -137,4 +143,26 @@ public class ManageUserFragment extends Fragment {
 
         return view;
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        menu.clear();
+//        inflater.inflate(R.menu.main, menu);
+//        MenuItem menuItem = menu.findItem(R.id.search);
+//        SearchView searchView = (SearchView) MenuItem.getActionView(menuItem);
+//        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+//        MenuItemCompat.setActionView(item, searchView);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Do search code here
+//                return true;
+//            }
+//        });
+//    }
 }
