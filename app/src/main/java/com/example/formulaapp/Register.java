@@ -40,6 +40,10 @@ public class Register extends AppCompatActivity {
     User user = new User();
     private GoogleSignInClient mGoogleSignInClient;
 
+    public void onBackPressed() {
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

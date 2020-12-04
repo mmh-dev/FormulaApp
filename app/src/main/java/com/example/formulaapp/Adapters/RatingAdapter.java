@@ -1,6 +1,7 @@
 package com.example.formulaapp.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Holder> {
             holder.ranking.setTextColor(context.getResources().getColor(R.color.colorYellow));
         } else {
             holder.cupRating.setVisibility(View.GONE);
+            holder.ranking.setTextColor(Color.GRAY);
         }
     }
 

@@ -35,6 +35,10 @@ public class Login extends AppCompatActivity {
     FirebaseUser firebaseUser;
     GoogleSignInClient mGoogleSignInClient;
 
+    public void onBackPressed() {
+        finish();
+    }
+
 
     @Override
     protected void onStart() {

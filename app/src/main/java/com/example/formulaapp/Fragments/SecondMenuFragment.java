@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -94,20 +95,25 @@ public class SecondMenuFragment extends Fragment {
         start_test_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TestFragment testFragment = new TestFragment();
-                if (questionList.size() >= 20) {
-                    totalQuestionsNumber = 20;
-                } else {
-                    totalQuestionsNumber = questionList.size();
+                if (questionList.size() == 0){
+                    Toast.makeText(getActivity(), R.string.no_test_questions, Toast.LENGTH_SHORT).show();
                 }
-                TestData testData = new TestData(header, false, 0, totalQuestionsNumber, questionList, user, 0);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("testData", testData);
-                testFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, testFragment).
-                        addToBackStack("SecondMenu").commit();
+                else {
+                    TestFragment testFragment = new TestFragment();
+                    if (questionList.size() >= 20) {
+                        totalQuestionsNumber = 20;
+                    } else {
+                        totalQuestionsNumber = questionList.size();
+                    }
+                    TestData testData = new TestData(header, false, 0, totalQuestionsNumber, questionList, user, 0);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("testData", testData);
+                    testFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                            .replace(R.id.fragment_container, testFragment).
+                            addToBackStack("SecondMenu").commit();
+                }
             }
         });
 
@@ -133,6 +139,7 @@ public class SecondMenuFragment extends Fragment {
     }
 
     private void fillList(String header) {
+        pagesList.clear();
         switch (header) {
             case "Двигатель":
                 Collections.addAll(pagesList, getResources().getStringArray(R.array.engine));

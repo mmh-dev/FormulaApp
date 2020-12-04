@@ -115,10 +115,13 @@ public class RatingFragment extends Fragment {
                         your_position.setText(String.valueOf(u.getRanking()));
                         if (u.getRanking() == 1) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_gold, null));
+                            your_position.setTextColor(getContext().getResources().getColor(R.color.colorYellow));
                         } else if (u.getRanking() == 2) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_silver, null));
+                            your_position.setTextColor(getContext().getResources().getColor(R.color.colorYellow));
                         } else if (u.getRanking() == 3) {
                             cup.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_cup_bronze, null));
+                            your_position.setTextColor(getContext().getResources().getColor(R.color.colorYellow));
                         }
                     }
                 }
