@@ -1,6 +1,10 @@
 package com.example.formulaapp.Fragments;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,27 +13,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
+
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
-
 
 import androidx.fragment.app.Fragment;
 
 import com.example.formulaapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleFragment extends Fragment {
 
     String header;
     FloatingActionButton floatingActionButton;
-    WebView article;
+    WebView webView;
+    List<String> savedPagesList = new ArrayList<>();
+    String savedJson;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_article, container, false);
+
+        savedPagesList.clear();
+        SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        savedJson = pref.getString("key", null); // getting String
+        Type type = new TypeToken<List<String>>(){}.getType();
+        savedPagesList.addAll(new Gson().fromJson(savedJson, type));
 
 
         Bundle bundle = this.getArguments();
@@ -39,16 +56,60 @@ public class ArticleFragment extends Fragment {
         getActivity().setTitle(header);
 
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
-        article = view.findViewById(R.id.article);
+        webView = view.findViewById(R.id.article);
 
-        article.getSettings().setJavaScriptEnabled(true);
-        article.getSettings().setLoadsImagesAutomatically(true);
-        article.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        article.setWebViewClient(new MyWebViewClient());
-        article.loadUrl(getLink(header));
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!hasDuplicate(savedPagesList, header)){
+                    savedPagesList.add(header);
+                }
+                savePage(savedPagesList, pref);
+                webView.getSettings().setAppCacheEnabled( true );
+                webView.getSettings().setAllowFileAccess( true );
+                webView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
+                webView.getSettings().setAppCachePath( getContext().getCacheDir().getAbsolutePath() );
+            }
+        });
+//        webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
+
+//        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+//        if ( !isNetworkAvailable() ) { // loading offline
+//            webView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
+//        }
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl(getLink(header));
 
         return view;
     }
+
+    private boolean hasDuplicate(List<String> savedPagesList, String header) {
+        for (String s:savedPagesList) {
+            if (s.equals(header)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void savePage(List<String> savedPagesList, SharedPreferences pref) {
+        SharedPreferences.Editor editor = pref.edit();
+        String json = new Gson().toJson(savedPagesList);
+        editor.putString("key", json); // Storing string
+        editor.apply(); // apply changes
+        Log.i("tag", String.valueOf(savedPagesList.size()));
+        Log.i("tag1", json);
+
+    }
+
+//    private boolean isNetworkAvailable() {
+//        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    }
 
     private class MyWebViewClient extends WebViewClient {
         @TargetApi(Build.VERSION_CODES.N)
