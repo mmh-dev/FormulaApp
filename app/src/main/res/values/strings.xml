@@ -313,5 +313,6 @@
     <string name="interns">Стажеры</string>
     <string name="employees">Сотрудники</string>
     <string name="no_test_questions">Нет вопросов для теста!</string>
+    <string name="page_is_saved">Страница сохранена!</string>
 
 </resources>

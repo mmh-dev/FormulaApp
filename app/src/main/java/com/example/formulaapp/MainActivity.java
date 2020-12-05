@@ -22,6 +22,7 @@ import com.example.formulaapp.Fragments.MainMenuFragment;
 import com.example.formulaapp.Fragments.ManageUserFragment;
 import com.example.formulaapp.Fragments.RatingFragment;
 import com.example.formulaapp.Fragments.SavedPagesFragment;
+import com.example.formulaapp.Fragments.SavedPagesListFragment;
 import com.example.formulaapp.Fragments.SpravochnikFragment;
 import com.example.formulaapp.Fragments.TestFragment;
 import com.example.formulaapp.Fragments.UserRatingFragment;
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.saved_pages:
                         getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, new SavedPagesFragment()).commit();
+                                replace(R.id.fragment_container, new SavedPagesListFragment()).commit();
                         break;
                     case R.id.final_test:
                         if (questionList.size() >= 50) {

@@ -9,5 +9,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_menu"
         android:layout_width="match_parent"
+        android:backgroundTint="@android:color/white"
         android:layout_height="match_parent"/>
 </RelativeLayout>

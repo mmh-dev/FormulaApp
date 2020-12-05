@@ -17,6 +17,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -36,6 +37,7 @@ public class ArticleFragment extends Fragment {
     WebView webView;
     List<String> savedPagesList = new ArrayList<>();
     String savedJson;
+    SharedPreferences pref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,11 +45,13 @@ public class ArticleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_article, container, false);
 
         savedPagesList.clear();
-        SharedPreferences pref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        savedJson = pref.getString("key", null); // getting String
+        getContext();
+        pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        savedJson = pref.getString("key", ""); // getting String
         Type type = new TypeToken<List<String>>(){}.getType();
-        savedPagesList.addAll(new Gson().fromJson(savedJson, type));
-
+        if (savedPagesList != null){
+            savedPagesList.addAll(new Gson().fromJson(savedJson, type));
+        }
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -67,22 +71,16 @@ public class ArticleFragment extends Fragment {
                 if (!hasDuplicate(savedPagesList, header)){
                     savedPagesList.add(header);
                 }
-                savePage(savedPagesList, pref);
+                savePage(savedPagesList);
                 webView.getSettings().setAppCacheEnabled( true );
                 webView.getSettings().setAllowFileAccess( true );
                 webView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
                 webView.getSettings().setAppCachePath( getContext().getCacheDir().getAbsolutePath() );
             }
         });
-//        webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
-
-//        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-//        if ( !isNetworkAvailable() ) { // loading offline
-//            webView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
-//        }
+        webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
         webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl(getLink(header));
-
         return view;
     }
 
@@ -95,21 +93,13 @@ public class ArticleFragment extends Fragment {
         return false;
     }
 
-    private void savePage(List<String> savedPagesList, SharedPreferences pref) {
+    private void savePage(List<String> savedPagesList) {
         SharedPreferences.Editor editor = pref.edit();
         String json = new Gson().toJson(savedPagesList);
         editor.putString("key", json); // Storing string
-        editor.apply(); // apply changes
-        Log.i("tag", String.valueOf(savedPagesList.size()));
-        Log.i("tag1", json);
-
+        editor.commit(); // apply changes
+        Toast.makeText(getContext(), R.string.page_is_saved, Toast.LENGTH_SHORT).show();
     }
-
-//    private boolean isNetworkAvailable() {
-//        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//    }
 
     private class MyWebViewClient extends WebViewClient {
         @TargetApi(Build.VERSION_CODES.N)
