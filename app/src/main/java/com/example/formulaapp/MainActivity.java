@@ -11,17 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.formulaapp.Fragments.AboutAppFragment;
+import com.example.formulaapp.Fragments.ArticleFragment;
 import com.example.formulaapp.Fragments.EditTestCategoriesFragment;
 import com.example.formulaapp.Fragments.MainMenuFragment;
 import com.example.formulaapp.Fragments.ManageUserFragment;
 import com.example.formulaapp.Fragments.RatingFragment;
-import com.example.formulaapp.Fragments.SavedPagesFragment;
 import com.example.formulaapp.Fragments.SavedPagesListFragment;
 import com.example.formulaapp.Fragments.SpravochnikFragment;
 import com.example.formulaapp.Fragments.TestFragment;
@@ -64,9 +63,14 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
@@ -74,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MainMenuFragment()).commit();
+        }
+        if (item.getItemId() == R.id.search) {
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -96,11 +103,8 @@ public class MainActivity extends AppCompatActivity {
             nav_menu.findItem(R.id.send_email_to_developer).setVisible(false);
         }
 
-
         toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-
-
         referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

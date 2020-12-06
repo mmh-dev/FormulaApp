@@ -49,7 +49,7 @@ public class ArticleFragment extends Fragment {
         pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         savedJson = pref.getString("key", ""); // getting String
         Type type = new TypeToken<List<String>>(){}.getType();
-        if (savedPagesList != null){
+        if (!savedJson.equals("")) {
             savedPagesList.addAll(new Gson().fromJson(savedJson, type));
         }
 
@@ -61,7 +61,6 @@ public class ArticleFragment extends Fragment {
 
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         webView = view.findViewById(R.id.article);
-
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadsImagesAutomatically(true);
 
@@ -71,7 +70,7 @@ public class ArticleFragment extends Fragment {
                 if (!hasDuplicate(savedPagesList, header)){
                     savedPagesList.add(header);
                 }
-                savePage(savedPagesList);
+                savePage();
                 webView.getSettings().setAppCacheEnabled( true );
                 webView.getSettings().setAllowFileAccess( true );
                 webView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
@@ -93,7 +92,7 @@ public class ArticleFragment extends Fragment {
         return false;
     }
 
-    private void savePage(List<String> savedPagesList) {
+    private void savePage() {
         SharedPreferences.Editor editor = pref.edit();
         String json = new Gson().toJson(savedPagesList);
         editor.putString("key", json); // Storing string

@@ -42,20 +42,15 @@ public class SavedPagesFragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         loadedJson = pref.getString("key", ""); // getting String
         Type type = new TypeToken<List<String>>(){}.getType();
+        if (!loadedJson.equals("")) {
+            offlinePagesList.addAll(new Gson().fromJson(loadedJson, type));
+        }
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             header = bundle.getString("title");
         }
         getActivity().setTitle(header);
-
-        if (offlinePagesList != null){
-            offlinePagesList.addAll(new Gson().fromJson(loadedJson, type));
-        }
-
-
-
-
 
 
         offlineWebView = view.findViewById(R.id.saved_article);
@@ -67,7 +62,7 @@ public class SavedPagesFragment extends Fragment {
         offlineWebView.getSettings().setAppCachePath( getContext().getCacheDir().getAbsolutePath() );
         offlineWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ONLY);
         offlineWebView.setWebViewClient(new MySavedWebViewClient());
-        offlineWebView.loadUrl(getLink(offlinePagesList.get(0)));
+        offlineWebView.loadUrl(getLink(header));
 
         return view;
     }
@@ -76,7 +71,7 @@ public class SavedPagesFragment extends Fragment {
         @TargetApi(Build.VERSION_CODES.N)
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            view.loadUrl(getLink(offlinePagesList.get(0)));
+            view.loadUrl(getLink(header));
             return true;
         }
     }

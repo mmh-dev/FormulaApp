@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,11 +39,14 @@ public class SavedPagesListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getActivity().setTitle(R.string.saved_pages);
 
+        getFragmentManager().popBackStack("saved_list", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
         getContext();
         SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         loadedJson = pref.getString("key", ""); // getting String
         Type type = new TypeToken<List<String>>(){}.getType();
-        if (offlinePagesList != null){
+        if (!loadedJson.equals("")) {
             offlinePagesList.addAll(new Gson().fromJson(loadedJson, type));
         }
 
@@ -58,6 +62,7 @@ public class SavedPagesListFragment extends Fragment {
                 savedPagesFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
+                        .addToBackStack("saved_list")
                         .replace(R.id.fragment_container, savedPagesFragment).commit();
             }
 
