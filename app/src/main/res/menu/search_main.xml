@@ -13,6 +13,6 @@
         android:id="@+id/search_home"
         android:icon="@drawable/ic_home_white"
         android:title="Home"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>

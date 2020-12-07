@@ -52,15 +52,14 @@ public class SavedPagesFragment extends Fragment {
         }
         getActivity().setTitle(header);
 
-
         offlineWebView = view.findViewById(R.id.saved_article);
         offlineWebView.getSettings().setLoadsImagesAutomatically(true);
         offlineWebView.getSettings().setJavaScriptEnabled(true);
         offlineWebView.getSettings().setAppCacheEnabled( true );
         offlineWebView.getSettings().setAllowFileAccess( true );
-        offlineWebView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
+        offlineWebView.getSettings().setAppCacheMaxSize( 20 * 1024 * 1024 ); // 20MB
         offlineWebView.getSettings().setAppCachePath( getContext().getCacheDir().getAbsolutePath() );
-        offlineWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ONLY);
+        offlineWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK);
         offlineWebView.setWebViewClient(new MySavedWebViewClient());
         offlineWebView.loadUrl(getLink(header));
 

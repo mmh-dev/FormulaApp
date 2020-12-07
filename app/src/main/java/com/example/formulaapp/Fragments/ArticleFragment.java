@@ -17,6 +17,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ public class ArticleFragment extends Fragment {
     List<String> savedPagesList = new ArrayList<>();
     String savedJson;
     SharedPreferences pref;
+    ProgressBar loadingBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +61,7 @@ public class ArticleFragment extends Fragment {
         }
         getActivity().setTitle(header);
 
+        loadingBar = view.findViewById(R.id.loadingBar);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         webView = view.findViewById(R.id.article);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -78,8 +81,15 @@ public class ArticleFragment extends Fragment {
             }
         });
         webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
-        webView.setWebViewClient(new MyWebViewClient());
+        webView.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                loadingBar.setVisibility(View.GONE);
+                super.onPageFinished(view, url);
+            }
+        });
         webView.loadUrl(getLink(header));
+
         return view;
     }
 
@@ -105,6 +115,7 @@ public class ArticleFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             view.loadUrl(getLink(header));
+            loadingBar.setVisibility(View.GONE);
             return true;
         }
     }

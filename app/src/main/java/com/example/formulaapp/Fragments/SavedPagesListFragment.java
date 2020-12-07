@@ -12,12 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.formulaapp.Adapters.PagesAdapter;
 import com.example.formulaapp.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,7 @@ public class SavedPagesListFragment extends Fragment {
     List<String> offlinePagesList = new ArrayList<>();
     String loadedJson;
     RecyclerView recyclerView;
+    Button clearCache;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class SavedPagesListFragment extends Fragment {
 
         offlinePagesList.clear();
         recyclerView = view.findViewById(R.id.saved_pages_view);
+        clearCache = view.findViewById(R.id.clear_cache);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getActivity().setTitle(R.string.saved_pages);
 
@@ -63,7 +70,9 @@ public class SavedPagesListFragment extends Fragment {
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
                         .addToBackStack("saved_list")
-                        .replace(R.id.fragment_container, savedPagesFragment).commit();
+                        .replace(R.id.fragment_container, savedPagesFragment)
+                        .addToBackStack("saved_list")
+                        .commit();
             }
 
             @Override
@@ -72,6 +81,40 @@ public class SavedPagesListFragment extends Fragment {
             }
         });
 
+        clearCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    File dir = getActivity().getCacheDir();
+                    deleteDir(dir);
+                    SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear().apply();
+                    offlinePagesList.clear();
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(getActivity(), R.string.cleared, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            }
+        });
+
         return view;
+    }
+    public boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
     }
 }
