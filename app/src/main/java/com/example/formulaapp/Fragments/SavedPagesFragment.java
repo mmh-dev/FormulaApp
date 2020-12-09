@@ -59,7 +59,7 @@ public class SavedPagesFragment extends Fragment {
         offlineWebView.getSettings().setAllowFileAccess( true );
         offlineWebView.getSettings().setAppCacheMaxSize( 20 * 1024 * 1024 ); // 20MB
         offlineWebView.getSettings().setAppCachePath( getContext().getCacheDir().getAbsolutePath() );
-        offlineWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        offlineWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ONLY);
         offlineWebView.setWebViewClient(new MySavedWebViewClient());
         offlineWebView.loadUrl(getLink(header));
 
