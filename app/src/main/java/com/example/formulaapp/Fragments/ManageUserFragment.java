@@ -3,16 +3,14 @@ package com.example.formulaapp.Fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +37,28 @@ public class ManageUserFragment extends Fragment {
     MainMenuAdapter adapter;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, new MainMenuFragment()).commit();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        super.onActivityCreated(savedInstanceState);
+    }
 
 
     @Override

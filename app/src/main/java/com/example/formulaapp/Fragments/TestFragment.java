@@ -57,13 +57,19 @@ public class TestFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        SecondMenuFragment secondMenuFragment = new SecondMenuFragment();
+                        Fragment fragment;
+                        if (isFinal){
+                            fragment = new MainMenuFragment();
+                        }
+                        else {
+                            fragment = new SecondMenuFragment();
+                        }
                         Bundle bundle = new Bundle();
                         bundle.putString("header", header);
-                        secondMenuFragment.setArguments(bundle);
+                        fragment.setArguments(bundle);
                         getFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_left)
-                                .replace(R.id.fragment_container, secondMenuFragment).
+                                .replace(R.id.fragment_container, fragment).
                                 addToBackStack("MainMenu").commit();
                         return true;
                     }
