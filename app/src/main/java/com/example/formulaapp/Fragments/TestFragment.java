@@ -41,6 +41,7 @@ public class TestFragment extends Fragment {
     double totalPoints, totalQuestionsNumber;
     int count, selectedVariant;
     List<Question> questionList = new ArrayList<>();
+    List<Question> rawQuestionList = new ArrayList<>();
     User user;
     String chosenAnswer;
 
@@ -69,13 +70,14 @@ public class TestFragment extends Fragment {
             isFinal = testData.isFinal();
             totalPoints = testData.getPoints();
             totalQuestionsNumber = testData.getTotalQuestionsNumber();
-            questionList = testData.getQuestionList();
+            rawQuestionList = testData.getQuestionList();
             user = testData.getUser();
             count = testData.getCount();
             count++;
         }
 
         getActivity().setTitle(header);
+        questionList.addAll(rawQuestionList);
 
         questions_passed.setText(String.valueOf(count));
         questions_total.setText(String.valueOf((int) totalQuestionsNumber));

@@ -80,7 +80,8 @@ public class SecondMenuFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question q = dataSnapshot.getValue(Question.class);
-                    if (q.getCategory().equals(header)) {
+                    assert q != null;
+                    if (q.getCategory() != null && q.getCategory().equals(header)) {
                         questionList.add(q);
                     }
                 }

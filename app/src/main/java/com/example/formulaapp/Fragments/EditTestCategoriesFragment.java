@@ -49,47 +49,50 @@ public class EditTestCategoriesFragment extends Fragment {
                 menuBulletList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question question = dataSnapshot.getValue(Question.class);
-                    switch (Objects.requireNonNull(question).getCategory()) {
-                        case "Двигатель":
-                            count[0]++;
-                            break;
-                        case "Трансмиссия":
-                            count[1]++;
-                            break;
-                        case "Подвеска":
-                            count[2]++;
-                            break;
-                        case "Рулевое управление":
-                            count[3]++;
-                            break;
-                        case "Система охлаждения":
-                            count[4]++;
-                            break;
-                        case "Система зажигания":
-                            count[5]++;
-                            break;
-                        case "Топливная система":
-                            count[6]++;
-                            break;
-                        case "Тормозная система":
-                            count[7]++;
-                            break;
-                        case "Электрооборудование":
-                            count[8]++;
-                            break;
-                        case "Датчики":
-                            count[9]++;
-                            break;
-                        case "Кузов":
-                            count[10]++;
-                            break;
-                        case "Салон":
-                            count[11]++;
-                            break;
-                        default:
-                            count[12]++;
-                            break;
+                    if (question.getCategory() != null){
+                        switch (Objects.requireNonNull(question).getCategory()) {
+                            case "Двигатель":
+                                count[0]++;
+                                break;
+                            case "Трансмиссия":
+                                count[1]++;
+                                break;
+                            case "Подвеска":
+                                count[2]++;
+                                break;
+                            case "Рулевое управление":
+                                count[3]++;
+                                break;
+                            case "Система охлаждения":
+                                count[4]++;
+                                break;
+                            case "Система зажигания":
+                                count[5]++;
+                                break;
+                            case "Топливная система":
+                                count[6]++;
+                                break;
+                            case "Тормозная система":
+                                count[7]++;
+                                break;
+                            case "Электрооборудование":
+                                count[8]++;
+                                break;
+                            case "Датчики":
+                                count[9]++;
+                                break;
+                            case "Кузов":
+                                count[10]++;
+                                break;
+                            case "Салон":
+                                count[11]++;
+                                break;
+                            default:
+                                count[12]++;
+                                break;
+                        }
                     }
+
                 }
                 menuBulletList.add(new MenuBullet(manCats[0], descCats[0], R.drawable.engine, null, count[0], null));
                 menuBulletList.add(new MenuBullet(manCats[1], descCats[1], R.drawable.gearbox, null, count[1], null));

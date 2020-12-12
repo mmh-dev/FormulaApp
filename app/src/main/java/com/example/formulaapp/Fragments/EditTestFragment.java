@@ -62,7 +62,7 @@ public class EditTestFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Question question = dataSnapshot.getValue(Question.class);
                     assert question != null;
-                    if (question.getCategory().equals(header)) {
+                    if (question.getCategory() != null && question.getCategory().equals(header)) {
                         questionsList.add(question.getQuestionText());
                     }
 
