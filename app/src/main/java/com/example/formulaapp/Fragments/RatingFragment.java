@@ -16,11 +16,9 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.formulaapp.Models.User;
-import com.example.formulaapp.MyMarkerView;
 import com.example.formulaapp.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -158,9 +156,6 @@ public class RatingFragment extends Fragment {
 
         Legend l = chart.getLegend();
         l.setEnabled(false);
-
-        IMarker mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
-        chart.setMarker(mv);
 
         PieDataSet dataSet = new PieDataSet(myPointsData(myUser), "");
         dataSet.setSliceSpace(3f);
